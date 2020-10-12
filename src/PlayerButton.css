@@ -1,0 +1,12 @@
+.drumMachine__sequencer__PlayerButton{
+    border: 2px solid teal;
+    height: 50px;
+    width: 50px;
+}
+
+.drumMachine__sequencer__PlayerButton__active{
+    border: 2px solid teal;
+    background-color: tomato;
+    height: 50px;
+    width: 50px;
+}

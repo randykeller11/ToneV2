@@ -1,0 +1,26 @@
+.drumMachine{
+    /* border: 2px solid black; */
+    display: flex;
+    flex-flow: column;
+    padding-top: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.drumMachine__controls{
+    border: 2px solid orange;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.drumMachine__sequencer{
+    border: 2px solid royalblue;
+
+}
+
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row;
+    list-style-type: none;
+}
