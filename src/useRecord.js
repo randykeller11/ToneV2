@@ -9,20 +9,16 @@ function useRecord(players) {
     players.forEach((element, i) => {
       statesArray.push({
         key: i,
-        part: []
+        part: [],
       });
     });
     setRecordings(statesArray);
   };
 
-
-  // const updateActiveStates = (_index, status) => {
-  //   //   console.log('its connected', name, status);
-  //   const updatedStates = buttonStates.map((button, index) => index === _index ? {active: status} : button);
-  //   setButtonStates(updatedStates);
-  // };
-
   return [recordingsConstructor, recordings];
 }
 
 export default useRecord;
+
+//function for recording
+//   const updatedStates = buttonStates.map((button, index) => index === _index ? {active: status} : button);
