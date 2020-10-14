@@ -43,26 +43,10 @@ function App() {
   //   handleBpmChange,
   // ] = useTransport();
 
-  const [makeButtonStates, buttonStates, updateActiveStates] = useActiveState();
+  const [recordingsConstructor, recordings] = useActiveState();
 
-  const [recordings, setRecordings] = useState([
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-  ]);
+
+
   const [isRecording, setIsRecording] = useState(false);
 
   //<--------------------------------------------📌📋📍📂
@@ -91,7 +75,7 @@ function App() {
 
   useEffect(() => {
     if (!loading) {
-      makeButtonStates(players);
+      recordingsConstructor(players);
     }
   }, [loading]);
 
@@ -104,10 +88,8 @@ function App() {
           <PlayerButton
             index={index}
             player={players[index]}
-            activeState={buttonStates[index]}
-            updateState={updateActiveStates}
+            part={recordings[index]}
             listener={listeners[index]}
-            recordings={recordings[index]}
             isRecording={isRecording}
           />
         ))}

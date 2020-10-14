@@ -12,7 +12,7 @@ function PlayerButton({index, player, activeState, updateState, listener, record
       player.start();
       // console.log(buttonStates);
 
-      updateState(index, true);
+      // updateState(index, true);
 
       ////<--------------------------------------------📌📋📍📂
       ////<--------------------------------------------📌📋📍📂
@@ -20,7 +20,7 @@ function PlayerButton({index, player, activeState, updateState, listener, record
       //save time stamp to a Tone.part for the keys specific tone.player
     }
     else{
-      updateState(index, false);
+      // updateState(index, false);
     }
   }, [listener]);
 

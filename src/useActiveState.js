@@ -2,26 +2,27 @@ import React, { useState, useEffect } from "react";
 
 function useActiveState(players) {
   //logic for button click event listeners
-  const [buttonStates, setButtonStates] = useState([]);
+  const [recordings, setRecordings] = useState([]);
 
-  const makeButtonStates = (players) => {
+  const recordingsConstructor = (players) => {
     let statesArray = [];
-    players.forEach((element) => {
+    players.forEach((element, i) => {
       statesArray.push({
-        active: false,
+        key: i,
+        part: []
       });
     });
-    setButtonStates(statesArray);
+    setRecordings(statesArray);
   };
 
 
-  const updateActiveStates = (_index, status) => {
-    //   console.log('its connected', name, status);
-    const updatedStates = buttonStates.map((button, index) => index === _index ? {active: status} : button);
-    setButtonStates(updatedStates);
-  };
+  // const updateActiveStates = (_index, status) => {
+  //   //   console.log('its connected', name, status);
+  //   const updatedStates = buttonStates.map((button, index) => index === _index ? {active: status} : button);
+  //   setButtonStates(updatedStates);
+  // };
 
-  return [makeButtonStates, buttonStates, updateActiveStates];
+  return [recordingsConstructor, recordings];
 }
 
 export default useActiveState;
