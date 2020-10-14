@@ -45,33 +45,7 @@ function App() {
 
   const [recordingsConstructor, recordings] = useActiveState();
 
-
-
   const [isRecording, setIsRecording] = useState(false);
-
-  //<--------------------------------------------📌📋📍📂
-  //             16 event listeners 👇🏾👇🏾👇🏾👇🏾👇🏾
-  //            (eventually move to custom hook that returns [button_0, button_1])
-  //<--------------------------------------------📌📋📍📂
-
-  //   useEffect(() => {
-  //   if (button_0) {
-  //     console.log('listener connected');
-  //     Tone.start();
-  //     players[5].start();
-  //     // console.log(buttonStates);
-
-  //     updateActiveStates(0, true);
-
-  //     ////<--------------------------------------------📌📋📍📂
-  //     ////<--------------------------------------------📌📋📍📂
-  //     //play sound
-  //     //save time stamp to a Tone.part for the keys specific tone.player
-  //   }
-  //   else{
-  //     updateActiveStates(0, false);
-  //   }
-  // }, [button_0]);
 
   useEffect(() => {
     if (!loading) {
@@ -100,7 +74,3 @@ function App() {
 
 export default App;
 
-// const passActiveState = (name) => {
-//   const targetState = buttonStates.filter((player)=> player.name === name);
-//   return targetState[0];
-// }
