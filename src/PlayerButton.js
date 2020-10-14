@@ -25,7 +25,7 @@ function PlayerButton({index, isRecording}) {
   }
 
       return(
-        <div onMouseDown={handleMouseDown} onMouseUp={()=>setIsActive(false)} className="donut__pads__pad">
+        <div onMouseDown={handleMouseDown} onMouseUp={()=>setIsActive(false)} onMouseLeave={()=>setIsActive(false)} className="donut__pads__pad">
           {
             listeners[index] || isActive ? 
             <div className="donut__pads__padActive"></div> 
