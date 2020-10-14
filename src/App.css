@@ -1,26 +1,33 @@
-.drumMachine{
-    /* border: 2px solid black; */
+.donut{
+    /* border: 3px solid orange; */
+    padding: 6em;
     display: flex;
     flex-flow: column;
-    padding-top: 2em;
-    padding-left: 2em;
-    padding-right: 2em;
+    height: 50vh;
+    width: 50vh;
 }
 
-.drumMachine__controls{
-    border: 2px solid orange;
+.donut > h1 {
+    border: 2px solid black;
+    background-color: darkgray;
+}
+
+.donut__controls {
+    /* border: 3px solid black; */
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+
+    background-color: darkgray;
     display: flex;
     justify-content: space-evenly;
+    /* padding-bottom: 2em; */
 }
 
-.drumMachine__sequencer{
-    border: 2px solid royalblue;
-
-}
-
-ul {
+.donut__pads{
+    border: 3px solid black;
     display: flex;
-    justify-content: space-evenly;
-    flex-flow: row;
-    list-style-type: none;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 5px;
+    background-color: darkgray;
 }

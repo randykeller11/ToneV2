@@ -61,13 +61,23 @@ function App() {
   } else {
     return (
       <dataLayer.Provider value={{players, listeners}}>
-        <div className="buttonsContainer">
+        <div className='donut'>
+        <h1>🍩 Donut 5000</h1>
+
+          <div className='donut__controls'>
+            <button>play</button>
+            <button>record</button>
+            <button>metronome</button>
+          </div>
+          <div className="donut__pads">
           {players.map((player, index) => (
             <PlayerButton
               index={index}
               isRecording={isRecording}
             />
           ))}
+        </div>
+
         </div>
       </dataLayer.Provider>
     );

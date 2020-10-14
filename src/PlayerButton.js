@@ -17,12 +17,20 @@ function PlayerButton({index, isRecording}) {
 
   }, [listeners[index]]);
 
+   if(listeners[index]){
     return (
 
-      <div>
-          <h1>🥂</h1>
+      <div className="donut__pads__padActive">
       </div>
     );
+   }
+   else {
+    return (
+
+      <div className="donut__pads__pad">
+      </div>
+    );
+   }
   }
 
 

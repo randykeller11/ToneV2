@@ -1,12 +1,16 @@
-.drumMachine__sequencer__PlayerButton{
-    border: 2px solid teal;
-    height: 50px;
-    width: 50px;
+.donut__pads__pad{
+    margin: 2px;
+    background-color: grey;
+    padding: 4px;
+    height: 4em;
+    width:4em;
+    border: 2px solid black;
 }
 
-.drumMachine__sequencer__PlayerButton__active{
-    border: 2px solid teal;
-    background-color: tomato;
-    height: 50px;
-    width: 50px;
+.donut__pads__padActive{
+    padding: 4px;
+    background-color: rgba(155, 47, 160, 0.728);
+    height: 4em;
+    width:4em;
+    border: 2px solid black;
 }
