@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function useActiveState(players) {
+function useRecord(players) {
   //logic for button click event listeners
   const [recordings, setRecordings] = useState([]);
 
@@ -25,4 +25,4 @@ function useActiveState(players) {
   return [recordingsConstructor, recordings];
 }
 
-export default useActiveState;
+export default useRecord;

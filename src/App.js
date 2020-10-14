@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import useTransport from "./useTransport";
 import useKeyPress from "./useKeyPress";
-import useActiveState from "./useActiveState";
+import useRecord from "./useRecord";
 import useLoadPlayers from "./useLoadPlayers";
 import useKeyboard from "./useKeyboard";
 import PlayerButton from "./PlayerButton";
@@ -43,7 +43,7 @@ function App() {
   //   handleBpmChange,
   // ] = useTransport();
 
-  const [recordingsConstructor, recordings] = useActiveState();
+  const [recordingsConstructor, recordings] = useRecord();
 
   const [isRecording, setIsRecording] = useState(false);
 
