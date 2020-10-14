@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState} from "react";
 import "./App.css";
 import useTransport from "./useTransport";
 import useKeyPress from "./useKeyPress";
@@ -37,6 +37,8 @@ function App() {
   const [players, loading] = useLoadPlayers();
   const listeners = useKeyboard();
 
+  const [gameState, setGameState] = useState(0);
+
   const [
     isPlaying,
     usePlayButton,
@@ -51,14 +53,30 @@ function App() {
 
   useEffect(() => {
     if (!loading) {
-      recordingsConstructor(players);
+      setGameState(1);
     }
   }, [loading]);
 
+  const handleGameStart = () => {
+    recordingsConstructor(players);
+    setGameState(2);
+    Tone.start();
+  }
 
-  if (loading) {
+
+  if (gameState === 0) {
     return <h1>loading</h1>;
-  } else {
+  } 
+    else if(gameState ===1){
+      return (
+        <div className="donut__mainMenu">
+          <h1>Welcome to the 🍩 Donut 5000 </h1>
+          <button onClick={handleGameStart}>Start</button>
+        </div>
+      )
+    }
+  
+  else if (gameState === 2) {
     return (
       <dataLayer.Provider value={{players, listeners}}>
         <div className='donut'>
