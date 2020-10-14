@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "./App.css";
 import useTransport from "./useTransport";
 import useKeyPress from "./useKeyPress";
@@ -31,17 +31,19 @@ import * as Tone from "tone";
 ////<--------------------------------------------📌📋📍📂
 ////<--------------------------------------------📌📋📍📂
 
+export const dataLayer = React.createContext();
+
 function App() {
   const [players, loading] = useLoadPlayers();
   const listeners = useKeyboard();
 
-  // const [
-  //   isPlaying,
-  //   usePlayButton,
-  //   quantizeTransportPosition,
-  //   bpm,
-  //   handleBpmChange,
-  // ] = useTransport();
+  const [
+    isPlaying,
+    usePlayButton,
+    quantizeTransportPosition,
+    bpm,
+    handleBpmChange,
+  ] = useTransport();
 
   const [recordingsConstructor, recordings] = useRecord();
 
@@ -53,24 +55,23 @@ function App() {
     }
   }, [loading]);
 
+
   if (loading) {
     return <h1>loading</h1>;
   } else {
     return (
-      <div className="buttonsContainer">
-        {players.map((player, index) => (
-          <PlayerButton
-            index={index}
-            player={players[index]}
-            part={recordings[index]}
-            listener={listeners[index]}
-            isRecording={isRecording}
-          />
-        ))}
-      </div>
+      <dataLayer.Provider value={{players, listeners}}>
+        <div className="buttonsContainer">
+          {players.map((player, index) => (
+            <PlayerButton
+              index={index}
+              isRecording={isRecording}
+            />
+          ))}
+        </div>
+      </dataLayer.Provider>
     );
   }
 }
 
 export default App;
-

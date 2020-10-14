@@ -1,28 +1,21 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import './PlayerButton.css';
 import * as Tone from "tone";
+import {dataLayer} from './App';
 
 
-function PlayerButton({index, player, activeState, updateState, listener, recordings, isRecording}) {
+function PlayerButton({index, isRecording}) {
+
+  const {players, listeners} = useContext(dataLayer);
 
       useEffect(() => {
-    if (listener) {
-      console.log('listener connected');
+    if (listeners[index]) {
       Tone.start();
-      player.start();
-      // console.log(buttonStates);
-
-      // updateState(index, true);
-
-      ////<--------------------------------------------📌📋📍📂
-      ////<--------------------------------------------📌📋📍📂
-      //play sound
+      players[index].start();
       //save time stamp to a Tone.part for the keys specific tone.player
     }
-    else{
-      // updateState(index, false);
-    }
-  }, [listener]);
+
+  }, [listeners[index]]);
 
     return (
 
