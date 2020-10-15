@@ -6,27 +6,27 @@ import { dataLayer } from "./App";
 function PlayerButton({ index, isRecording }) {
   const [isActive, setIsActive] = useState(false);
   const { players, listeners } = useContext(dataLayer);
-  const [keyPressedUp, keyPressedDown, setKeyPressedUp] = listeners[index];
+  const [keyPressedDown, keyPressedUp, setKeyPressedUp] = listeners[index];
 
   const transportTime = Tone.Transport.position;
 
+  const upHandler = () => {
+    if (isActive) {
+      console.log("up", transportTime);
+      setIsActive(false);
+    }
+  };
+
   const downHandler = () => {
-    console.log('down', transportTime);
+    console.log("down", transportTime);
     setIsActive(true);
-  }
-
-  const upHandler = () =>{
-    console.log('up', transportTime);
-    setIsActive(false);
-
-  }
+  };
 
   useEffect(() => {
     if (keyPressedDown) {
       // players[index].start();
       //save time stamp to a Tone.part for the keys specific tone.player
       downHandler();
-
     }
   }, [keyPressedDown]);
 
@@ -38,7 +38,6 @@ function PlayerButton({ index, isRecording }) {
       setKeyPressedUp(false);
     }
   }, [keyPressedUp]);
-
 
   return (
     <div
