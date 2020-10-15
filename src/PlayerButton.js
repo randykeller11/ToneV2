@@ -22,6 +22,9 @@ function PlayerButton({ index, isRecording }) {
     setIsActive(true);
   };
 
+
+
+
   useEffect(() => {
     if (keyPressedDown) {
       // players[index].start();
@@ -29,6 +32,8 @@ function PlayerButton({ index, isRecording }) {
       downHandler();
     }
   }, [keyPressedDown]);
+
+  
 
   useEffect(() => {
     if (keyPressedUp) {
@@ -38,6 +43,9 @@ function PlayerButton({ index, isRecording }) {
       setKeyPressedUp(false);
     }
   }, [keyPressedUp]);
+
+
+
 
   return (
     <div
@@ -54,5 +62,7 @@ function PlayerButton({ index, isRecording }) {
     </div>
   );
 }
+
+
 
 export default PlayerButton;
