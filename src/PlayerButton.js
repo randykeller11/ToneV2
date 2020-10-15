@@ -1,40 +1,59 @@
-import React, {useEffect, useContext, useState} from "react";
-import './PlayerButton.css';
+import React, { useEffect, useContext, useState } from "react";
+import "./PlayerButton.css";
 import * as Tone from "tone";
-import {dataLayer} from './App';
+import { dataLayer } from "./App";
 
-
-function PlayerButton({index, isRecording}) {
+function PlayerButton({ index, isRecording }) {
   const [isActive, setIsActive] = useState(false);
+  const { players, listeners } = useContext(dataLayer);
+  const [keyPressedUp, keyPressedDown, setKeyPressedUp] = listeners[index];
 
-  const {players, listeners} = useContext(dataLayer);
+  const transportTime = Tone.Transport.position;
 
-      useEffect(() => {
-    if (listeners[index]) {
-      players[index].start();
-      //save time stamp to a Tone.part for the keys specific tone.player
-    }
-
-  }, [listeners[index]]);
-
-  const handleMouseDown = () => {
+  const downHandler = () => {
+    console.log('down', transportTime);
     setIsActive(true);
-    players[index].start();
+  }
 
+  const upHandler = () =>{
+    console.log('up', transportTime);
+    setIsActive(false);
 
   }
 
-      return(
-        <div onMouseDown={handleMouseDown} onMouseUp={()=>setIsActive(false)} onMouseLeave={()=>setIsActive(false)} className="donut__pads__pad">
-          {
-            listeners[index] || isActive ? 
-            <div className="donut__pads__padActive"></div> 
-            : <div className="donut__pads__padInactive"></div>
-          }
+  useEffect(() => {
+    if (keyPressedDown) {
+      // players[index].start();
+      //save time stamp to a Tone.part for the keys specific tone.player
+      downHandler();
 
-        </div>
-      )
-  }
+    }
+  }, [keyPressedDown]);
 
+  useEffect(() => {
+    if (keyPressedUp) {
+      // players[index].start();
+      //save time stamp to a Tone.part for the keys specific tone.player
+      upHandler();
+      setKeyPressedUp(false);
+    }
+  }, [keyPressedUp]);
+
+
+  return (
+    <div
+      onMouseDown={downHandler}
+      onMouseUp={upHandler}
+      onMouseLeave={upHandler}
+      className="donut__pads__pad"
+    >
+      {isActive ? (
+        <div className="donut__pads__padActive"></div>
+      ) : (
+        <div className="donut__pads__padInactive"></div>
+      )}
+    </div>
+  );
+}
 
 export default PlayerButton;
