@@ -20,6 +20,8 @@ function PlayerButton({ index, isRecording }) {
   const downHandler = () => {
     console.log(index,"down", transportTime);
     setIsActive(true);
+    players[index].start();
+
   };
 
 
