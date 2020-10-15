@@ -3,8 +3,6 @@ import * as Tone from 'tone';
 
 const useTransport = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
-  const currentStepRef = useRef(0);
   const [bpm, setBpm] = useState(72);
 
   const handleBpmChange = (e) => {
@@ -16,16 +14,16 @@ const useTransport = () => {
     Tone.Transport.bpm.value = bpm;
   },[bpm]);
 
+
+
+
   const usePlayButton = () => {
     if (!isPlaying) {
       setIsPlaying(true);
-      Tone.start();
       Tone.Transport.start();
     } else {
       setIsPlaying(false);
       Tone.Transport.stop();
-      currentStepRef.current = 0;
-      setCurrentStep(0);
     }
   };
 

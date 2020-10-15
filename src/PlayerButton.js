@@ -12,13 +12,13 @@ function PlayerButton({ index, isRecording }) {
 
   const upHandler = () => {
     if (isActive) {
-      console.log("up", transportTime);
+      console.log(index, "up", transportTime);
       setIsActive(false);
     }
   };
 
   const downHandler = () => {
-    console.log("down", transportTime);
+    console.log(index,"down", transportTime);
     setIsActive(true);
   };
 
@@ -52,13 +52,8 @@ function PlayerButton({ index, isRecording }) {
       onMouseDown={downHandler}
       onMouseUp={upHandler}
       onMouseLeave={upHandler}
-      className="donut__pads__pad"
+      className={isActive ? "donut__pads__padActive" : "donut__pads__padInactive"}
     >
-      {isActive ? (
-        <div className="donut__pads__padActive"></div>
-      ) : (
-        <div className="donut__pads__padInactive"></div>
-      )}
     </div>
   );
 }

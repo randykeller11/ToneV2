@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import useTransport from "./useTransport";
 import useKeyPress from "./useKeyPress";
@@ -11,12 +11,10 @@ import * as Tone from "tone";
 export const dataLayer = React.createContext();
 
 function App() {
-
   const [gameState, setGameState] = useState(0);
 
   const [players, loading] = useLoadPlayers();
   const listeners = useKeyboard();
-
 
   const [
     isPlaying,
@@ -25,6 +23,8 @@ function App() {
     bpm,
     handleBpmChange,
   ] = useTransport();
+
+  const [transportTime, setTransportTime] = useState("0:0:0");
 
   const [recordingsConstructor, recordings] = useRecord();
 
@@ -40,41 +40,38 @@ function App() {
     recordingsConstructor(players);
     setGameState(2);
     Tone.start();
-  }
 
+    Tone.Transport.scheduleRepeat((time) => {
+      setTransportTime(quantizeTransportPosition(Tone.Transport.position));
+    }, "16n");
+  };
 
   if (gameState === 0) {
     return <h1>loading</h1>;
-  } 
-    else if(gameState ===1){
-      return (
-        <div className="donut__mainMenu">
-          <h1>Welcome to the 🍩 Donut 5000 </h1>
-          <button onClick={handleGameStart}>Start</button>
-        </div>
-      )
-    }
-  
-  else if (gameState === 2) {
+  } else if (gameState === 1) {
     return (
-      <dataLayer.Provider value={{players, listeners}}>
-        <div className='donut'>
-        <h1>🍩 Donut 5000</h1>
+      <div className="donut__mainMenu">
+        <h1>Welcome to the 🍩 Donut 5000 </h1>
+        <button onClick={handleGameStart}>Start</button>
+      </div>
+    );
+  } else if (gameState === 2) {
+    return (
+      <dataLayer.Provider value={{ players, listeners }}>
+        <div className="donut">
+          <h1>🍩 Donut 5000</h1>
 
-          <div className='donut__controls'>
-            <button>play</button>
+          <div className="donut__controls">
+            <button onClick={usePlayButton}>play</button>
             <button>record</button>
             <button>metronome</button>
+            <h5>Time: {transportTime}</h5>
           </div>
           <div className="donut__pads">
-          {players.map((player, index) => (
-            <PlayerButton
-              index={index}
-              isRecording={isRecording}
-            />
-          ))}
-        </div>
-
+            {players.map((player, index) => (
+              <PlayerButton index={index} isRecording={isRecording} />
+            ))}
+          </div>
         </div>
       </dataLayer.Provider>
     );
@@ -82,9 +79,6 @@ function App() {
 }
 
 export default App;
-
-
-
 
 ////<--------------------------------------------📌📋📍📂
 ////<--------------------------------------------📌📋📍📂

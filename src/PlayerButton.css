@@ -4,13 +4,24 @@
     padding: 4px;
     height: 4em;
     width:4em;
+    padding: 4px;
+
     border: 2px solid black;
 }
 
 .donut__pads__padActive{
-    padding: 4px;
     background-color: rgba(155, 47, 160, 0.728);
     height: 4em;
     width:4em;
     border: 2px solid black;
+    padding: 4px;
+
+}
+
+.donut__pads__pad{
+    height: 4em;
+    width:4em;
+    padding: 4px;
+    border: 2px solid green;
+
 }
