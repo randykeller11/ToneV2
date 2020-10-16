@@ -65,7 +65,7 @@ function App() {
             <button onClick={usePlayButton}>play</button>
             <button>record</button>
             <button>metronome</button>
-            <h5>Time: {transportTime}</h5>
+            {isPlaying && <h5>{transportTime}</h5>}
           </div>
           <div className="donut__pads">
             {players.map((player, index) => (
