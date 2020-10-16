@@ -30,6 +30,8 @@ function App() {
 
   const [isRecording, setIsRecording] = useState(false);
 
+  const [metronome, setMetronome] = useState(null);
+
   useEffect(() => {
     if (!loading) {
       setGameState(1);
@@ -45,6 +47,18 @@ function App() {
       setTransportTime(quantizeTransportPosition(Tone.Transport.position));
     }, "16n");
   };
+
+  const metronomeButton = () => {
+    const _metronome = new Tone.Part((time)=>{
+      players[14].start();
+    },[["1:0:0"], ["2:0:0"]]);
+    _metronome.start(0);
+  
+    setMetronome(_metronome);
+  }
+
+
+
 
   if (gameState === 0) {
     return <h1>loading</h1>;
@@ -65,7 +79,7 @@ function App() {
           <div className="donut__controls">
             <button onClick={usePlayButton}>play</button>
             <button>record</button>
-            <button>metronome</button>
+            <button onClick={metronomeButton}>metronome</button>
             {/* {isPlaying && <h5>{transportTime}</h5>} */}
           </div>
           <div className="donut__pads">
