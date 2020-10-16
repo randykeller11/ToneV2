@@ -60,12 +60,13 @@ function App() {
       <dataLayer.Provider value={{ players, listeners }}>
         <div className="donut">
           <h1>🍩 Donut 5000</h1>
+          <h3>Beats: {transportTime}</h3>
 
           <div className="donut__controls">
             <button onClick={usePlayButton}>play</button>
             <button>record</button>
             <button>metronome</button>
-            {isPlaying && <h5>{transportTime}</h5>}
+            {/* {isPlaying && <h5>{transportTime}</h5>} */}
           </div>
           <div className="donut__pads">
             {players.map((player, index) => (
