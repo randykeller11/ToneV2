@@ -50,10 +50,12 @@ function App() {
 
   const metronomeButton = () => {
     const _metronome = new Tone.Part((time)=>{
-      players[14].start();
-    },[["1:0:0"], ["2:0:0"]]);
+      players[7].start();
+    },[[0]]);
     _metronome.start(0);
-  
+    _metronome.loopEnd = "0:1:0";
+    _metronome.loop = true;
+    _metronome.humanize = true;
     setMetronome(_metronome);
   }
 
