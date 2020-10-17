@@ -1,5 +1,5 @@
 .donut{
-    /* border: 3px solid orange; */
+    border: 3px solid orange;
     padding-left: 6em;
     padding-right: 6em;
     padding-bottom: 6em;
@@ -8,7 +8,7 @@
 
     display: flex;
     flex-flow: column;
-    height: 50vh;
+    height: 60vh;
     width: 55vh;
 }
 
@@ -42,7 +42,7 @@
 .donut__pads{
     border: 3px solid black;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     padding: 5px;
     background-color: darkgray;

@@ -20,7 +20,7 @@ const useTransport = () => {
   const usePlayButton = () => {
     if (!isPlaying) {
       setIsPlaying(true);
-      Tone.Transport.start();
+      Tone.Transport.start("+0.1");
     } else {
       setIsPlaying(false);
       Tone.Transport.stop();
