@@ -49,18 +49,18 @@ function App() {
   };
 
   const metronomeButton = () => {
-    const _metronome = new Tone.Part((time)=>{
-      players[7].start();
-    },[[0]]);
+    const _metronome = new Tone.Part(
+      (time) => {
+        players[7].start();
+      },
+      [[0]]
+    );
     _metronome.start(0);
     _metronome.loopEnd = "0:1:0";
     _metronome.loop = true;
     _metronome.humanize = true;
     setMetronome(_metronome);
-  }
-
-
-
+  };
 
   if (gameState === 0) {
     return <h1>loading</h1>;
@@ -76,12 +76,19 @@ function App() {
       <dataLayer.Provider value={{ players, listeners }}>
         <div className="donut">
           <h1>🍩 Donut 5000</h1>
-          <h3>Beats: {transportTime}</h3>
+          <div className="donut__transportTime">
+            <h3>Beats: {transportTime}</h3>
+            <form onChange={handleBpmChange}>
+              <input type="range" max={170} min={60} defaultValue={bpm} />
+            </form>
+            <h3>BPM: {bpm}</h3>
+          </div>
 
           <div className="donut__controls">
             <button onClick={usePlayButton}>play</button>
             <button>record</button>
             <button onClick={metronomeButton}>metronome</button>
+            <button>Clear</button>
             {/* {isPlaying && <h5>{transportTime}</h5>} */}
           </div>
           <div className="donut__pads">
