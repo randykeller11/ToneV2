@@ -7,6 +7,7 @@ import useLoadPlayers from "./useLoadPlayers";
 import useKeyboard from "./useKeyboard";
 import PlayerButton from "./PlayerButton";
 import * as Tone from "tone";
+import ModeToggler from "./ModeToggler";
 
 export const dataLayer = React.createContext();
 
@@ -62,6 +63,7 @@ function App() {
     setMetronome(_metronome);
   };
 
+
   if (gameState === 0) {
     return <h1>loading</h1>;
   } else if (gameState === 1) {
@@ -73,9 +75,9 @@ function App() {
     );
   } else if (gameState === 2) {
     return (
-      <dataLayer.Provider value={{ players, listeners }}>
+      <dataLayer.Provider value={{ players, listeners, setGameState }}>
         <div className="donut">
-          <h1>🍩 Donut 5000</h1>
+          <h1>Player Mode</h1>
           <div className="donut__transportTime">
             <h3>Beats: {transportTime}</h3>
             <form onChange={handleBpmChange}>
@@ -96,6 +98,36 @@ function App() {
               <PlayerButton index={index} isRecording={isRecording} />
             ))}
           </div>
+          <ModeToggler />
+        </div>
+      </dataLayer.Provider>
+    );
+  } else if ((gameState === 3)) {
+    return (
+      <dataLayer.Provider value={{ players, listeners, setGameState }}>
+        <div className="donut">
+          <h1>arrangement Mode</h1>
+          <div className="donut__transportTime">
+            <h3>Beats: {transportTime}</h3>
+            <form onChange={handleBpmChange}>
+              <input type="range" max={170} min={60} defaultValue={bpm} />
+            </form>
+            <h3>BPM: {bpm}</h3>
+          </div>
+
+          <div className="donut__controls">
+            <button onClick={usePlayButton}>play</button>
+            <button>record</button>
+            <button onClick={metronomeButton}>metronome</button>
+            <button>Clear</button>
+            {/* {isPlaying && <h5>{transportTime}</h5>} */}
+          </div>
+          <div className="donut__pads">
+            {players.map((player, index) => (
+              <PlayerButton index={index} isRecording={isRecording} />
+            ))}
+          </div>
+          <ModeToggler />
         </div>
       </dataLayer.Provider>
     );
