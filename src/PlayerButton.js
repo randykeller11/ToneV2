@@ -4,30 +4,35 @@ import * as Tone from "tone";
 import { dataLayer } from "./App";
 
 function PlayerButton({ index, isRecording }) {
-  const [isActive, setIsActive] = useState(false);
-  const { players, listeners } = useContext(dataLayer);
+  const { players, listeners, isActiveArray, setIsActive } = useContext(
+    dataLayer
+  );
   const [keyPressedDown, keyPressedUp, setKeyPressedUp] = listeners[index];
+
+  const isActive = isActiveArray[index].activeState;
 
   const transportTime = Tone.Transport.position;
 
   const downHandler = () => {
-    console.log(index,"down", transportTime);
-    setIsActive(true);
+    let localArray = [...isActiveArray];
+    const updatedStates = localArray.map((player) =>
+      player.id === index ? {id: index, activeState: true } : player
+    );
+    setIsActive(updatedStates);
+    console.log(index, "down", transportTime);
     players[index].start();
-
   };
 
   const upHandler = () => {
     if (isActive) {
+      let localArray = [...isActiveArray];
+      const updatedStates = localArray.map((player) =>
+        player.id === index ? {id: index, activeState: false } : player
+      );
+      setIsActive(updatedStates);
       console.log(index, "up", transportTime);
-      setIsActive(false);
     }
   };
-
-
-
-
-
 
   useEffect(() => {
     if (keyPressedDown) {
@@ -36,8 +41,6 @@ function PlayerButton({ index, isRecording }) {
       downHandler();
     }
   }, [keyPressedDown]);
-
-  
 
   useEffect(() => {
     if (keyPressedUp) {
@@ -48,20 +51,16 @@ function PlayerButton({ index, isRecording }) {
     }
   }, [keyPressedUp]);
 
-
-
-
   return (
     <div
       onMouseDown={downHandler}
       onMouseUp={upHandler}
       onMouseLeave={upHandler}
-      className={isActive ? "donut__pads__padActive" : "donut__pads__padInactive"}
-    >
-    </div>
+      className={
+        isActive ? "donut__pads__padActive" : "donut__pads__padInactive"
+      }
+    ></div>
   );
 }
-
-
 
 export default PlayerButton;

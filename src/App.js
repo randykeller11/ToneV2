@@ -25,6 +25,16 @@ function App() {
     handleBpmChange,
   ] = useTransport();
 
+
+  //Make this a custom hook 👇🏾👇🏾👇🏾
+  const [isActiveArray, setIsActive] = useState(null);
+  const isActiveArrayConstructor = (players) => {
+    let localArray = []
+    players.map((player, i)=>(localArray.push({id: i, activeState: false})));
+    setIsActive(localArray);
+  }
+
+
   const [transportTime, setTransportTime] = useState("0:0:0");
 
   const [recordingsConstructor, recordings] = useRecord();
@@ -32,6 +42,8 @@ function App() {
   const [isRecording, setIsRecording] = useState(false);
 
   const [metronome, setMetronome] = useState(null);
+
+
 
   useEffect(() => {
     if (!loading) {
@@ -41,6 +53,7 @@ function App() {
 
   const handleGameStart = () => {
     recordingsConstructor(players);
+    isActiveArrayConstructor(players);
     setGameState(2);
     Tone.start();
 
@@ -48,8 +61,8 @@ function App() {
       setTransportTime(quantizeTransportPosition(Tone.Transport.position));
     }, "16n");
   };
-
   const metronomeButton = () => {
+
     const _metronome = new Tone.Part(
       (time) => {
         players[7].start();
@@ -75,7 +88,7 @@ function App() {
     );
   } else if (gameState === 2) {
     return (
-      <dataLayer.Provider value={{ players, listeners, setGameState }}>
+      <dataLayer.Provider value={{ players, listeners, setGameState, isActiveArray, setIsActive }}>
         <div className="donut">
           <h1>Player Mode</h1>
           <div className="donut__transportTime">
