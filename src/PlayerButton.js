@@ -10,6 +10,13 @@ function PlayerButton({ index, isRecording }) {
 
   const transportTime = Tone.Transport.position;
 
+  const downHandler = () => {
+    console.log(index,"down", transportTime);
+    setIsActive(true);
+    players[index].start();
+
+  };
+
   const upHandler = () => {
     if (isActive) {
       console.log(index, "up", transportTime);
@@ -17,12 +24,7 @@ function PlayerButton({ index, isRecording }) {
     }
   };
 
-  const downHandler = () => {
-    console.log(index,"down", transportTime);
-    setIsActive(true);
-    players[index].start();
 
-  };
 
 
 
