@@ -136,7 +136,7 @@ function App() {
             {/* {isPlaying && <h5>{transportTime}</h5>} */}
           </div>
           <div className="donut__pads">
-            {players.map((player, index) => (
+            {recordings.map((player, index) => (
               <PlayerButton index={index} isRecording={isRecording} />
             ))}
           </div>

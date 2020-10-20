@@ -13,9 +13,11 @@ function PlayerButton({ index, isRecording }) {
 
   const transportTime = Tone.Transport.position;
 
+
+  //make this a custom hook 👇🏾👇🏾👇🏾👇🏾
   const downHandler = () => {
-    let localArray = [...isActiveArray];
-    const updatedStates = localArray.map((player) =>
+    let localArrayActive = [...isActiveArray];
+    const updatedStates = localArrayActive.map((player) =>
       player.id === index ? {id: index, activeState: true } : player
     );
     setIsActive(updatedStates);
