@@ -35,7 +35,7 @@ function App() {
 
   const [transportTime, setTransportTime] = useState("0:0:0");
 
-  const [recordingsConstructor, recordings] = useRecord();
+  const [recordingsConstructor, recordings, setRecordings] = useRecord();
 
   const [isRecording, setIsRecording] = useState(false);
 
@@ -83,7 +83,17 @@ function App() {
   } else if (gameState === 2) {
     return (
       <dataLayer.Provider
-        value={{ players, listeners, setGameState, isActiveArray, setIsActive }}
+        value={{
+          players,
+          listeners,
+          setGameState,
+          isActiveArray,
+          setIsActive,
+          isRecording,
+          isPlaying,
+          setRecordings,
+          recordings
+        }}
       >
         <div className="donut">
           <h1>Player Mode</h1>
@@ -96,15 +106,25 @@ function App() {
           </div>
 
           <div className="donut__controls">
-          {isPlaying ? (
-              <button onClick={usePlayButton} style={{ backgroundColor: "peru" }}>Play/Stop</button>
+            {isPlaying ? (
+              <button
+                onClick={usePlayButton}
+                style={{ backgroundColor: "peru" }}
+              >
+                Play/Stop
+              </button>
             ) : (
               <button onClick={usePlayButton}>Play/Stop</button>
             )}
             {isRecording ? (
-              <button onClick={()=>setIsRecording(false)} style={{ backgroundColor: "peru" }}>record</button>
+              <button
+                onClick={() => setIsRecording(false)}
+                style={{ backgroundColor: "peru" }}
+              >
+                record
+              </button>
             ) : (
-              <button onClick={()=>setIsRecording(true)}>record</button>
+              <button onClick={() => setIsRecording(true)}>record</button>
             )}
             {/* <button onClick={metronomeButton}>metronome</button> */}
             <button>Clear</button>
@@ -129,6 +149,9 @@ function App() {
           isActiveArray,
           setIsActive,
           isRecording,
+          isPlaying,
+          setRecordings,
+          recordings
         }}
       >
         <div className="donut">
@@ -142,15 +165,25 @@ function App() {
           </div>
 
           <div className="donut__controls">
-          {isPlaying ? (
-              <button onClick={usePlayButton} style={{ backgroundColor: "peru" }}>Play/Stop</button>
+            {isPlaying ? (
+              <button
+                onClick={usePlayButton}
+                style={{ backgroundColor: "peru" }}
+              >
+                Play/Stop
+              </button>
             ) : (
               <button onClick={usePlayButton}>Play/Stop</button>
             )}
             {isRecording ? (
-              <button onClick={()=>setIsRecording(false)} style={{ backgroundColor: "peru" }}>record</button>
+              <button
+                onClick={() => setIsRecording(false)}
+                style={{ backgroundColor: "peru" }}
+              >
+                record
+              </button>
             ) : (
-              <button onClick={()=>setIsRecording(true)}>record</button>
+              <button onClick={() => setIsRecording(true)}>record</button>
             )}
             {/* <button onClick={metronomeButton}>metronome</button> */}
             <button>Clear</button>

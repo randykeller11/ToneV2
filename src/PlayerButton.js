@@ -3,24 +3,34 @@ import "./PlayerButton.css";
 import * as Tone from "tone";
 import { dataLayer } from "./App";
 
-function PlayerButton({ index, isRecording }) {
-  const { players, listeners, isActiveArray, setIsActive } = useContext(
-    dataLayer
-  );
+function PlayerButton({ index }) {
+  const {
+    players,
+    listeners,
+    isActiveArray,
+    setIsActive,
+    isRecording,
+    isPlaying,
+    setRecordings,
+    recordings,
+  } = useContext(dataLayer);
   const [keyPressedDown, keyPressedUp, setKeyPressedUp] = listeners[index];
 
   const isActive = isActiveArray[index].activeState;
 
   const transportTime = Tone.Transport.position;
 
+  const makeButtonActive = () => {
+    let localArrayActive = [...isActiveArray];
+    const updatedStates = localArrayActive.map((player) =>
+      player.id === index ? { id: index, activeState: true } : player
+    );
+    setIsActive(updatedStates);
+  };
 
   //make this a custom hook 👇🏾👇🏾👇🏾👇🏾
   const downHandler = () => {
-    let localArrayActive = [...isActiveArray];
-    const updatedStates = localArrayActive.map((player) =>
-      player.id === index ? {id: index, activeState: true } : player
-    );
-    setIsActive(updatedStates);
+    makeButtonActive();
     console.log(index, "down", transportTime);
     players[index].start();
   };
@@ -29,7 +39,7 @@ function PlayerButton({ index, isRecording }) {
     if (isActive) {
       let localArray = [...isActiveArray];
       const updatedStates = localArray.map((player) =>
-        player.id === index ? {id: index, activeState: false } : player
+        player.id === index ? { id: index, activeState: false } : player
       );
       setIsActive(updatedStates);
       console.log(index, "up", transportTime);
@@ -38,16 +48,12 @@ function PlayerButton({ index, isRecording }) {
 
   useEffect(() => {
     if (keyPressedDown) {
-      // players[index].start();
-      //save time stamp to a Tone.part for the keys specific tone.player
       downHandler();
     }
   }, [keyPressedDown]);
 
   useEffect(() => {
     if (keyPressedUp) {
-      // players[index].start();
-      //save time stamp to a Tone.part for the keys specific tone.player
       upHandler();
       setKeyPressedUp(false);
     }
