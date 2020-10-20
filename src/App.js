@@ -25,15 +25,13 @@ function App() {
     handleBpmChange,
   ] = useTransport();
 
-
   //Make this a custom hook 👇🏾👇🏾👇🏾
   const [isActiveArray, setIsActive] = useState(null);
   const isActiveArrayConstructor = (players) => {
-    let localArray = []
-    players.map((player, i)=>(localArray.push({id: i, activeState: false})));
+    let localArray = [];
+    players.map((player, i) => localArray.push({ id: i, activeState: false }));
     setIsActive(localArray);
-  }
-
+  };
 
   const [transportTime, setTransportTime] = useState("0:0:0");
 
@@ -42,8 +40,6 @@ function App() {
   const [isRecording, setIsRecording] = useState(false);
 
   const [metronome, setMetronome] = useState(null);
-
-
 
   useEffect(() => {
     if (!loading) {
@@ -62,7 +58,6 @@ function App() {
     }, "16n");
   };
   const metronomeButton = () => {
-
     const _metronome = new Tone.Part(
       (time) => {
         players[7].start();
@@ -76,7 +71,6 @@ function App() {
     setMetronome(_metronome);
   };
 
-
   if (gameState === 0) {
     return <h1>loading</h1>;
   } else if (gameState === 1) {
@@ -88,7 +82,9 @@ function App() {
     );
   } else if (gameState === 2) {
     return (
-      <dataLayer.Provider value={{ players, listeners, setGameState, isActiveArray, setIsActive }}>
+      <dataLayer.Provider
+        value={{ players, listeners, setGameState, isActiveArray, setIsActive }}
+      >
         <div className="donut">
           <h1>Player Mode</h1>
           <div className="donut__transportTime">
@@ -100,9 +96,17 @@ function App() {
           </div>
 
           <div className="donut__controls">
-            <button onClick={usePlayButton}>play</button>
-            <button>record</button>
-            <button onClick={metronomeButton}>metronome</button>
+          {isPlaying ? (
+              <button onClick={usePlayButton} style={{ backgroundColor: "peru" }}>Play/Stop</button>
+            ) : (
+              <button onClick={usePlayButton}>Play/Stop</button>
+            )}
+            {isRecording ? (
+              <button onClick={()=>setIsRecording(false)} style={{ backgroundColor: "peru" }}>record</button>
+            ) : (
+              <button onClick={()=>setIsRecording(true)}>record</button>
+            )}
+            {/* <button onClick={metronomeButton}>metronome</button> */}
             <button>Clear</button>
             {/* {isPlaying && <h5>{transportTime}</h5>} */}
           </div>
@@ -115,9 +119,18 @@ function App() {
         </div>
       </dataLayer.Provider>
     );
-  } else if ((gameState === 3)) {
+  } else if (gameState === 3) {
     return (
-      <dataLayer.Provider value={{ players, listeners, setGameState, isActiveArray, setIsActive }}>
+      <dataLayer.Provider
+        value={{
+          players,
+          listeners,
+          setGameState,
+          isActiveArray,
+          setIsActive,
+          isRecording,
+        }}
+      >
         <div className="donut">
           <h1>arrangement Mode</h1>
           <div className="donut__transportTime">
@@ -129,9 +142,17 @@ function App() {
           </div>
 
           <div className="donut__controls">
-            <button onClick={usePlayButton}>play</button>
-            <button>record</button>
-            <button onClick={metronomeButton}>metronome</button>
+          {isPlaying ? (
+              <button onClick={usePlayButton} style={{ backgroundColor: "peru" }}>Play/Stop</button>
+            ) : (
+              <button onClick={usePlayButton}>Play/Stop</button>
+            )}
+            {isRecording ? (
+              <button onClick={()=>setIsRecording(false)} style={{ backgroundColor: "peru" }}>record</button>
+            ) : (
+              <button onClick={()=>setIsRecording(true)}>record</button>
+            )}
+            {/* <button onClick={metronomeButton}>metronome</button> */}
             <button>Clear</button>
             {/* {isPlaying && <h5>{transportTime}</h5>} */}
           </div>

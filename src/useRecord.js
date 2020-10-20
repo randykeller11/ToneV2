@@ -9,7 +9,7 @@ function useRecord(players) {
     players.forEach((element, i) => {
       statesArray.push({
         key: i,
-        part: [],
+        part: null,
       });
     });
     setRecordings(statesArray);
