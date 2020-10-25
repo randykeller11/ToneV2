@@ -5,13 +5,6 @@ import {LinearProgress} from '@material-ui/core/';
 
 
 function Tester() {
-    const dataLayer = useContext(dataLayer);
-
-    const makePlayerPads = () => {
-        dataLayer.players.map((player) => (
-            <h1>this is a player</h1>
-        ))
-    }
 
 
   return (
@@ -36,13 +29,10 @@ function Tester() {
         </div>
       </div>
       <div className="donut__progressBar">
-      <LinearProgress variant="determinate" value={80} />
+      <LinearProgress variant="determinate" value={25} />
       </div>
       {/* pads */}
       <div className="donut__testPads">
-          {
-
-          }
         
 
 
