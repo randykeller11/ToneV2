@@ -8,6 +8,7 @@ import useKeyboard from "./useKeyboard";
 import PlayerButton from "./PlayerButton";
 import * as Tone from "tone";
 import ModeToggler from "./ModeToggler";
+import Tester from './Tester';
 
 export const dataLayer = React.createContext();
 
@@ -95,48 +96,7 @@ function App() {
           recordings
         }}
       >
-        <div className="donut">
-          <h1>Player Mode</h1>
-          <div className="donut__transportTime">
-            <h3>Beats: {transportTime}</h3>
-            <form onChange={handleBpmChange}>
-              <input type="range" max={170} min={60} defaultValue={bpm} />
-            </form>
-            <h3>BPM: {bpm}</h3>
-          </div>
-
-          <div className="donut__controls">
-            {isPlaying ? (
-              <button
-                onClick={usePlayButton}
-                style={{ backgroundColor: "peru" }}
-              >
-                Play/Stop
-              </button>
-            ) : (
-              <button onClick={usePlayButton}>Play/Stop</button>
-            )}
-            {isRecording ? (
-              <button
-                onClick={() => setIsRecording(false)}
-                style={{ backgroundColor: "peru" }}
-              >
-                record
-              </button>
-            ) : (
-              <button onClick={() => setIsRecording(true)}>record</button>
-            )}
-            {/* <button onClick={metronomeButton}>metronome</button> */}
-            <button>Clear</button>
-            {/* {isPlaying && <h5>{transportTime}</h5>} */}
-          </div>
-          <div className="donut__pads">
-            {players.map((player, index) => (
-              <PlayerButton index={index} isRecording={isRecording} />
-            ))}
-          </div>
-          <ModeToggler />
-        </div>
+          <Tester />
       </dataLayer.Provider>
     );
   } else if (gameState === 3) {

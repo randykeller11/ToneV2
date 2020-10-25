@@ -1,0 +1,19 @@
+.donut__practice{
+    margin: 3rem;
+    border: 2px solid blue;
+}
+
+.donut__transportButtons{
+    /* border: 2px solid green; */
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.donut__transportButtons__buttonBox{
+    display: flex;
+    flex-flow: column;
+}
+
+.donut__progressBar{
+    /* border: 2px solid red; */
+}
