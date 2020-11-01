@@ -1,6 +1,7 @@
 .donut__practice{
-    margin: 3rem;
+    margin: 2vh;
     border: 2px solid blue;
+    height: 90vh;
 }
 
 .donut__transportButtons{
@@ -20,4 +21,8 @@
 
 .donut__playerPads{
     display: flex;
+    border: 2px solid red;
+    justify-content: center;
+    margin: 1vh;
+    height: 50vh;
 }
