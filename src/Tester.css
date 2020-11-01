@@ -8,6 +8,8 @@
     /* border: 2px solid green; */
     display: flex;
     justify-content: space-evenly;
+    padding-top: 1.5vh;
+    padding-bottom: 1vh;
 }
 
 .donut__transportButtons__buttonBox{
@@ -17,7 +19,7 @@
 
 .donut__playerPads{
     display: flex;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     justify-content: center;
     margin: 1vh;
     height: 50vh;
