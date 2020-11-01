@@ -15,10 +15,6 @@
     flex-flow: column;
 }
 
-.donut__progressBar{
-    /* border: 2px solid red; */
-}
-
 .donut__playerPads{
     display: flex;
     border: 2px solid red;
