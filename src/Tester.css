@@ -1,7 +1,11 @@
+
+
 .donut__practice{
     margin: 2vh;
-    border: 2px solid blue;
     height: 90vh;
+    background-color: rgb(242, 226, 210);
+;
+    border-radius: 2%;
 }
 
 .donut__transportButtons{
