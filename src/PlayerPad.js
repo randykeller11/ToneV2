@@ -3,11 +3,11 @@ import './PlayerPad.css';
 
 function PlayerPad({colIndex, rowIndex}) {
 
-    const colors = ["#4570E6","#5DADEC", "#0095B7", "#76D7EA"]
+    const colors = ["#4570E6","#5DADEC", "#76D7EA"];
 
     const mystyle = {
         "border-radius": "10%",
-        backgroundColor: colors[colIndex],
+        backgroundColor: colors[Math.floor(Math.random() * colors.length)],
       }
     return (
         <div className="PlayerPad" style={mystyle}>
