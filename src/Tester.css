@@ -2,7 +2,8 @@
 
 .donut__practice{
     height: 100vh;
-    background-color: rgba(110, 110, 110, 0.288);
+    background-color: #E5E5E5
+    ;
 }
 
 .donut__transportButtons{
@@ -31,13 +32,13 @@
 
 .donut__toggleSounds{
     margin-top: 19vh;
-    border-top: 2px solid darkgray;
+    border-top: 2px solid black;
     /* padding-bottom: 9vh; */
 }
 
 .donut__toggleMode{
     margin-top: 7vh;
-    border-top: 2px solid darkgray;
+    border-top: 2px solid black;
     padding-bottom: 9vh;
 }
 
@@ -64,13 +65,13 @@
 
     .donut__toggleSounds{
         margin-top: 5vh;
-        border-top: 2px solid darkgray;
+        border-top: 2px solid black;
         /* padding-bottom: 9vh; */
     }
 
     .donut__toggleMode{
         margin-top: 10vh;
-        border-top: 2px solid darkgray;
+        border-top: 2px solid black;
         padding-bottom: 9vh;
     }
 

@@ -66,11 +66,9 @@ function Tester() {
       </div>
       <div className="donut__playerPads">{makePlayPads()}</div>
       <div className="donut__toggleSounds">
-        <h1>sound toggler</h1>
         <button onClick={forwardSoundToggle}>New Sound Bank</button>
       </div>
       <div className="donut__toggleMode">
-        <h1>mode toggler</h1>
       </div>
     </div>
   );
