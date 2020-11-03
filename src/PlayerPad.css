@@ -2,6 +2,7 @@
     height: 10em;
     width: 10em;
     margin: 5px;
+    border-radius: 10%;
 }
 
 
@@ -10,5 +11,7 @@
         height: 7em;
         width: 7em;
         margin: 5px;
+        border-radius: 10%;
+
     }
   }

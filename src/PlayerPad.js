@@ -18,7 +18,6 @@ function PlayerPad({colIndex, rowIndex}) {
     const colors = ["#4570E6","#5DADEC", "#76D7EA"];
 
     const mystyle = {
-        "border-radius": "10%",
         backgroundColor: colors[Math.floor(Math.random() * colors.length)],
       }
     return (
