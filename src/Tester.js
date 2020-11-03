@@ -34,6 +34,7 @@ function Tester() {
 
   return (
     <div className="donut__practice">
+
       <div className="donut__transportButtons">
         <div className="donut__transportButtons__buttonBox">
           <button>⏯</button>

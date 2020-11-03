@@ -1,11 +1,8 @@
 
 
 .donut__practice{
-    margin: 2vh;
-    height: 90vh;
+    height: 100vh;
     background-color: rgba(110, 110, 110, 0.288);
-;
-    border-radius: 2%;
 }
 
 .donut__transportButtons{
@@ -22,9 +19,39 @@
 }
 
 .donut__playerPads{
+    padding-top: 1vh;
     display: flex;
-    /* border: 2px solid red; */
     justify-content: center;
     margin: 1vh;
     height: 50vh;
 }
+
+
+
+.donut__toggle{
+    margin-top: 17vh;
+    border-top: 2px solid darkgray;
+    padding-bottom: 9vh;
+}
+
+@media (max-width: 850px) {
+    .donut__playerPads{
+        padding-top: 5vh;
+        display: flex;
+        justify-content: center;
+        margin: 1vh;
+        height: 50vh;
+    }
+
+    .donut__progressBar{
+        padding-top: 2vh;
+    }
+    .donut__transportButtons{
+        /* border: 2px solid green; */
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 3vh;
+        padding-bottom: 1vh;
+    }
+
+  }

@@ -1,5 +1,14 @@
 .PlayerPad{
-    height: 6em;
-    width: 6em;
+    height: 10em;
+    width: 10em;
     margin: 5px;
 }
+
+
+@media (max-width: 850px) {
+    .PlayerPad{
+        height: 7em;
+        width: 7em;
+        margin: 5px;
+    }
+  }
