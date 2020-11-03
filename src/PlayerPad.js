@@ -1,7 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { dataLayer } from "./App";
 import './PlayerPad.css';
 
 function PlayerPad({colIndex, rowIndex}) {
+
+    const {
+        players,
+        listeners,
+        isActiveArray,
+        setIsActive,
+        isRecording,
+        isPlaying,
+        setRecordings,
+        recordings,
+      } = useContext(dataLayer);
 
     const colors = ["#4570E6","#5DADEC", "#76D7EA"];
 
