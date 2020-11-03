@@ -28,8 +28,15 @@
 
 
 
-.donut__toggle{
-    margin-top: 17vh;
+
+.donut__toggleSounds{
+    margin-top: 19vh;
+    border-top: 2px solid darkgray;
+    /* padding-bottom: 9vh; */
+}
+
+.donut__toggleMode{
+    margin-top: 7vh;
     border-top: 2px solid darkgray;
     padding-bottom: 9vh;
 }
@@ -52,6 +59,19 @@
         justify-content: space-evenly;
         padding-top: 3vh;
         padding-bottom: 1vh;
+    }
+
+
+    .donut__toggleSounds{
+        margin-top: 5vh;
+        border-top: 2px solid darkgray;
+        /* padding-bottom: 9vh; */
+    }
+
+    .donut__toggleMode{
+        margin-top: 10vh;
+        border-top: 2px solid darkgray;
+        padding-bottom: 9vh;
     }
 
   }

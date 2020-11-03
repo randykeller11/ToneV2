@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Tester.css";
 import { LinearProgress } from "@material-ui/core/";
 import { dataLayer } from "./App";
 import PlayerPad from "./PlayerPad";
 
 function Tester() {
+
+  const [colorTheme, setColorTheme] = useState(0);
+
   const {
     players,
     listeners,
@@ -26,11 +29,16 @@ function Tester() {
     return sortedPlayers.map((playerRow, colIndex)=>(
       <div className="donut__padRow">
         {playerRow.map((player, rowIndex)=>(
-          <PlayerPad rowIndex={rowIndex} colIndex={colIndex}/>
+          <PlayerPad colorTheme={colorTheme} rowIndex={rowIndex} colIndex={colIndex}/>
         ))}
       </div>
     ));
   };
+
+  const forwardSoundToggle = () => {
+    const newValue = (colorTheme + 1) % 3;
+    setColorTheme(newValue);
+  }
 
   return (
     <div className="donut__practice">
@@ -57,8 +65,12 @@ function Tester() {
         <LinearProgress variant="determinate" value={25} />
       </div>
       <div className="donut__playerPads">{makePlayPads()}</div>
-      <div className="donut__toggle">
-        <h1>main toggler</h1>
+      <div className="donut__toggleSounds">
+        <h1>sound toggler</h1>
+        <button onClick={forwardSoundToggle}>New Sound Bank</button>
+      </div>
+      <div className="donut__toggleMode">
+        <h1>mode toggler</h1>
       </div>
     </div>
   );
