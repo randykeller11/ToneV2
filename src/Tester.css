@@ -60,6 +60,7 @@
     width: 4vh;
     border-radius: 50%;
     border: 2px solid rgb(55, 0, 255);
+
 }
 #buttonBox__description{
     margin-top: 4px;
@@ -100,8 +101,8 @@
     }
 
     .transportButtons__buttonBox__circle{
-        height: 4vh;
-        width: 4vh;
+        height: 40px;
+        width: 40px;
         border-radius: 50%;
         border: 2px solid rgb(94, 59, 190);
 
