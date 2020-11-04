@@ -3,6 +3,8 @@ import "./Tester.css";
 import { LinearProgress } from "@material-ui/core/";
 import { dataLayer } from "./App";
 import PlayerPad from "./PlayerPad";
+import { PlayArrow, Mic, Undo, MusicNote } from '@material-ui/icons';
+
 
 function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
@@ -53,19 +55,31 @@ function Tester() {
     <div className="practice">
       <div className="transportButtons">
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle"></div>
+          <div className="transportButtons__buttonBox__circle">
+            <PlayArrow id="transportIcon" fontSize="large" color="primary"/>
+          </div>
           <h5 id="buttonBox__description">Play</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle"></div>
+          <div className="transportButtons__buttonBox__circle">
+            <Mic id="transportIcon" fontSize="large" color="primary"/>
+          </div>
           <h5 id="buttonBox__description">Record</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle"></div>
+          <div className="transportButtons__buttonBox__circle">
+            <Undo id="transportIcon" fontSize="large" color="primary"/>
+          </div>
           <h5 id="buttonBox__description">Undo</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle"></div>
+          <div className="transportButtons__buttonBox__circle">
+            <div id="transport__snapCircleContents">
+            <MusicNote fontSize="small" color="primary"/>
+            <MusicNote fontSize="small" color="primary"/>
+            </div>
+
+          </div>
           <h5 id="buttonBox__description">Snap</h5>
         </div>
       </div>
