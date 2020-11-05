@@ -36,7 +36,7 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
   };
 
   const activeStyle = {
-    border: "2px solid darkgray",
+    border: "4px solid dimgray",
     backgroundColor: padColor,
     opacity: "100%",
   };
