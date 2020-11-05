@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Tester.css";
 import { LinearProgress } from "@material-ui/core/";
 import { dataLayer } from "./App";
@@ -8,6 +8,7 @@ import { PlayArrow, Mic, Undo, MusicNote } from '@material-ui/icons';
 
 function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
+  const [playPads, setPlayPads] = useState(null);
 
   const {
     players,
@@ -21,19 +22,7 @@ function Tester() {
   } = useContext(dataLayer);
 
   const makePlayPads = () => {
-    const sortedPlayers = [];
-    const localPlayers = [...players];
-    sortedPlayers.push(localPlayers.filter((player, index) => index < 4));
-    sortedPlayers.push(
-      localPlayers.filter((player, index) => index >= 4 && index < 8)
-    );
-    sortedPlayers.push(
-      localPlayers.filter((player, index) => index >= 8 && index < 12)
-    );
-    sortedPlayers.push(
-      localPlayers.filter((player, index) => index >= 12 && index < 16)
-    );
-    return sortedPlayers.map((playerCol, rowIndex) => (
+    return playPads.map((playerCol, rowIndex) => (
       <div className="donut__padRow">
         {playerCol.map((player, colIndex) => (
           <PlayerPad
@@ -50,6 +39,26 @@ function Tester() {
     const newValue = (colorTheme + 1) % 3;
     setColorTheme(newValue);
   };
+
+  useEffect(()=>{
+    const sortedPlayers = [];
+    const localPlayers = [...players];
+    sortedPlayers.push(localPlayers.filter((player, index) => index < 4));
+    sortedPlayers.push(
+      localPlayers.filter((player, index) => index >= 4 && index < 8)
+    );
+    sortedPlayers.push(
+      localPlayers.filter((player, index) => index >= 8 && index < 12)
+    );
+    sortedPlayers.push(
+      localPlayers.filter((player, index) => index >= 12 && index < 16)
+    ); 
+
+    setPlayPads(sortedPlayers);
+
+  },[])
+
+
 
   return (
     <div className="practice">
@@ -86,7 +95,7 @@ function Tester() {
       <div className="progressBar">
         <LinearProgress variant="determinate" value={25} />
       </div>
-      <div className="playerPads">{makePlayPads()}</div>
+      <div className="playerPads">{playPads && makePlayPads()}</div>
       <div className="toggleSounds">
         <button onClick={forwardSoundToggle}>New Sound Bank</button>
       </div>

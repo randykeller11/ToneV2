@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { dataLayer } from "./App";
 import "./PlayerPad.css";
 import * as Tone from "tone";
@@ -20,21 +20,26 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
 
   const padIndex = (colIndex * 4) + rowIndex;
 
+  const [inactiveStyle, setInactiveStyle] = useState(null); 
+
   const colors = [
     ["#4570E6", "#5DADEC", "#76D7EA"],
     ["#FD3A4A", "#FF8866", "#FF9980"],
     ["#FFFF66", "#BEE64B", "#3AA655"],
   ];
 
-  const myStyleInactive = {
-    border: "2px solid darkgray",
-    backgroundColor: colors[colorTheme][Math.floor(Math.random() * 3)],
-  };
 
   const myStyleActive = {
     border: "2px solid darkgray",
     backgroundColor: "black",
   };
+
+  useEffect(()=>{
+    setInactiveStyle({
+      border: "2px solid darkgray",
+      backgroundColor: colors[colorTheme][Math.floor(Math.random() * 3)],
+    })
+  },[colorTheme])
 
   
 
@@ -89,7 +94,7 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
   onMouseDown={downHandler}
   onMouseUp={upHandler}
   onMouseLeave={upHandler}
-  className="PlayerPad" style={isActive ? myStyleActive : myStyleInactive}></div>;
+  className="PlayerPad" style={isActive ? myStyleActive : inactiveStyle}></div>;
 }
 
 export default PlayerPad;
