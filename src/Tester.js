@@ -33,9 +33,9 @@ function Tester() {
     sortedPlayers.push(
       localPlayers.filter((player, index) => index >= 12 && index < 16)
     );
-    return sortedPlayers.map((playerRow, colIndex) => (
+    return sortedPlayers.map((playerCol, rowIndex) => (
       <div className="donut__padRow">
-        {playerRow.map((player, rowIndex) => (
+        {playerCol.map((player, colIndex) => (
           <PlayerPad
             colorTheme={colorTheme}
             rowIndex={rowIndex}
