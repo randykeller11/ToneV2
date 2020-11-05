@@ -20,7 +20,7 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
 
   const padIndex = (colIndex * 4) + rowIndex;
 
-  const [inactiveStyle, setInactiveStyle] = useState(null); 
+  const [padColor, setPadColor] = useState(null); 
 
   const colors = [
     ["#4570E6", "#5DADEC", "#76D7EA"],
@@ -29,17 +29,22 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
   ];
 
 
-  const myStyleActive = {
+  const inactiveStyle = {
     border: "2px solid darkgray",
-    backgroundColor: "black",
+    backgroundColor: padColor,
+    opacity: "62%",
+  };
+
+  const activeStyle = {
+    border: "2px solid darkgray",
+    backgroundColor: padColor,
+    opacity: "100%",
   };
 
   useEffect(()=>{
-    setInactiveStyle({
-      border: "2px solid darkgray",
-      backgroundColor: colors[colorTheme][Math.floor(Math.random() * 3)],
-    })
+    setPadColor(colors[colorTheme][Math.floor(Math.random() * 3)]);
   },[colorTheme])
+
 
   
 
@@ -94,7 +99,7 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
   onMouseDown={downHandler}
   onMouseUp={upHandler}
   onMouseLeave={upHandler}
-  className="PlayerPad" style={isActive ? myStyleActive : inactiveStyle}></div>;
+  className="PlayerPad" style={isActive ? activeStyle : inactiveStyle}></div>;
 }
 
 export default PlayerPad;
