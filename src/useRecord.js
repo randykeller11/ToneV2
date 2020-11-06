@@ -15,7 +15,9 @@ function useRecord(players) {
     setRecordings(statesArray);
   };
 
-  return [recordingsConstructor, recordings, setRecordings];
+
+
+  return [recordingsConstructor, recordings, setRecordings,];
 }
 
 export default useRecord;

@@ -27,9 +27,7 @@ function App() {
 
   const [transportTime, setTransportTime] = useState("0:0:0");
 
-  const [recordingsConstructor, recordings, setRecordings] = useRecord();
-
-  const [isRecording, setIsRecording] = useState(false);
+  const [recordingsConstructor, recordings, setRecordings,] = useRecord();
 
   const [metronome, setMetronome] = useState(null);
 
@@ -66,9 +64,8 @@ function App() {
           setGameState,
           isActiveArray,
           setIsActive,
-          isRecording,
           setRecordings,
-          recordings
+          recordings,
         }}
       >
           <Tester />
