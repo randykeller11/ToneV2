@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
-import useTransport from "./useTransport";
 import useKeyPress from "./useKeyPress";
 import useRecord from "./useRecord";
 import useLoadPlayers from "./useLoadPlayers";
 import useKeyboard from "./useKeyboard";
-import PlayerButton from "./PlayerButton";
 import * as Tone from "tone";
 import Tester from './Tester';
 
@@ -17,13 +15,7 @@ function App() {
   const [players, loading] = useLoadPlayers();
   const listeners = useKeyboard();
 
-  const [
-    isPlaying,
-    usePlayButton,
-    quantizeTransportPosition,
-    bpm,
-    handleBpmChange,
-  ] = useTransport();
+
 
   //Make this a custom hook 👇🏾👇🏾👇🏾
   const [isActiveArray, setIsActive] = useState(null);
@@ -53,23 +45,8 @@ function App() {
     setGameState(2);
     Tone.start();
 
-    Tone.Transport.scheduleRepeat((time) => {
-      setTransportTime(quantizeTransportPosition(Tone.Transport.position));
-    }, "16n");
   };
-  const metronomeButton = () => {
-    const _metronome = new Tone.Part(
-      (time) => {
-        players[7].start();
-      },
-      [[0]]
-    );
-    _metronome.start(0);
-    _metronome.loopEnd = "0:1:0";
-    _metronome.loop = true;
-    _metronome.humanize = true;
-    setMetronome(_metronome);
-  };
+
 
   if (gameState === 0) {
     return <h1>loading</h1>;
@@ -90,7 +67,6 @@ function App() {
           isActiveArray,
           setIsActive,
           isRecording,
-          isPlaying,
           setRecordings,
           recordings
         }}

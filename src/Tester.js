@@ -4,11 +4,21 @@ import { LinearProgress } from "@material-ui/core/";
 import { dataLayer } from "./App";
 import PlayerPad from "./PlayerPad";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from '@material-ui/icons';
+import useTransport from "./useTransport";
+
 
 
 function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
   const [playPads, setPlayPads] = useState(null);
+
+  const [
+    isPlaying,
+    usePlayButton,
+    quantizeTransportPosition,
+    bpm,
+    handleBpmChange,
+  ] = useTransport();
 
   const {
     players,
@@ -16,7 +26,6 @@ function Tester() {
     isActiveArray,
     setIsActive,
     isRecording,
-    isPlaying,
     setRecordings,
     recordings,
   } = useContext(dataLayer);
@@ -56,7 +65,7 @@ function Tester() {
 
     setPlayPads(sortedPlayers);
 
-  },[])
+  },[]);
 
 
 
@@ -64,31 +73,31 @@ function Tester() {
     <div className="practice">
       <div className="transportButtons">
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle">
+          <div onClick={usePlayButton} className={isPlaying ? "transportButtons__buttonBox__circleActive" : "transportButtons__buttonBox__circleInactive"}>
             <PlayArrow id="transportIcon" fontSize="large" color="primary"/>
           </div>
           <h5 id="buttonBox__description">Play</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle">
+          <div className="transportButtons__buttonBox__circleInactive">
             <Mic id="transportIcon" fontSize="large" color="primary"/>
           </div>
           <h5 id="buttonBox__description">Record</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle">
+          <div className="transportButtons__buttonBox__circleInactive">
             <Undo id="transportIcon" fontSize="large" color="primary"/>
           </div>
           <h5 id="buttonBox__description">Undo</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle">
+          <div className="transportButtons__buttonBox__circleInactive">
             <Schedule id="transportIcon" fontSize="large" color="primary"/>
           </div>
           <h5 id="buttonBox__description">Click</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circle">
+          <div className="transportButtons__buttonBox__circleInactive">
             <div id="transport__snapCircleContents">
             <MusicNote fontSize="small" color="primary"/>
             <MusicNote fontSize="small" color="primary"/>
