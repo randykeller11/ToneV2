@@ -5,11 +5,15 @@ import { dataLayer } from "./App";
 import PlayerPad from "./PlayerPad";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
 import useTransport from "./useTransport";
+import useToggle from "./useToggle";
 
 function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
   const [playPads, setPlayPads] = useState(null);
-  const [isRecording, setIsRecording] = useState(false);
+
+  const [isRecording, toggleRecord] = useToggle();
+  const [clickMode, toggleClickMode] = useToggle();
+  const [snapMode, toggleSnapMode] = useToggle();
 
   const [
     isPlaying,
@@ -27,14 +31,6 @@ function Tester() {
     setRecordings,
     recordings,
   } = useContext(dataLayer);
-
-  const toggleRecord = () => {
-    if (!isRecording) {
-      setIsRecording(true);
-    } else {
-      setIsRecording(false);
-    }
-  };
 
   const makePlayPads = () => {
     return playPads.map((playerCol, rowIndex) => (
@@ -109,13 +105,27 @@ function Tester() {
           <h5 id="buttonBox__description">Undo</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circleInactive">
+          <div
+            onClick={toggleClickMode}
+            className={
+              clickMode
+                ? "transportButtons__buttonBox__circleActive"
+                : "transportButtons__buttonBox__circleInactive"
+            }
+          >
             <Schedule id="transportIcon" fontSize="large" color="primary" />
           </div>
           <h5 id="buttonBox__description">Click</h5>
         </div>
         <div className="transportButtons__buttonBox">
-          <div className="transportButtons__buttonBox__circleInactive">
+          <div
+            onClick={toggleSnapMode}
+            className={
+              snapMode
+                ? "transportButtons__buttonBox__circleActive"
+                : "transportButtons__buttonBox__circleInactive"
+            }
+          >
             <div id="transport__snapCircleContents">
               <MusicNote fontSize="small" color="primary" />
               <MusicNote fontSize="small" color="primary" />
