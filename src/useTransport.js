@@ -27,15 +27,9 @@ const useTransport = () => {
     }
   };
 
-  const quantizeTransportPosition = (transportValue) => {
-    const position = transportValue.split(':');
-    const lastDigit = position[2].split('.');
-    const quantizedPosition = [position[0], position[1], lastDigit[0]].join(':');
-    return quantizedPosition;
-  } 
 
 
-  return [isPlaying, usePlayButton, quantizeTransportPosition, bpm, handleBpmChange];
+  return [isPlaying, usePlayButton, bpm, handleBpmChange];
 };
 
 export default useTransport;

@@ -18,9 +18,9 @@ function Tester() {
   const [
     isPlaying,
     usePlayButton,
-    quantizeTransportPosition,
     bpm,
-    handleBpmChange,
+    // handleBpmChange,
+    quantizeTransportPosition,
   ] = useTransport();
 
   const {
@@ -41,6 +41,8 @@ function Tester() {
             rowIndex={rowIndex}
             colIndex={colIndex}
             isRecording={isRecording}
+            quantizeTransportPosition={quantizeTransportPosition}
+            snapMode = {snapMode}
           />
         ))}
       </div>
@@ -100,7 +102,7 @@ function Tester() {
         </div>
         <div className="transportButtons__buttonBox">
           <div className="transportButtons__buttonBox__circleInactive">
-            <Undo id="transportIcon" fontSize="large" color="primary" />
+            <Undo id="transportIcon" fontSize="large" color="disabled" />
           </div>
           <h5 id="buttonBox__description">Undo</h5>
         </div>

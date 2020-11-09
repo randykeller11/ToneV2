@@ -2,32 +2,30 @@ import React, { useContext, useEffect, useState } from "react";
 import { dataLayer } from "./App";
 import "./PlayerPad.css";
 import * as Tone from "tone";
+import helperFunctions from "./helperFunctions";
 
-
-function PlayerPad({ colorTheme, colIndex, rowIndex }) {
-  
-
+function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording }) {
   const {
     players,
     listeners,
     isActiveArray,
     setIsActive,
-    isRecording,
     isPlaying,
     setRecordings,
     recordings,
   } = useContext(dataLayer);
 
-  const padIndex = (colIndex * 4) + rowIndex;
+  const quantizeTransportPosition = helperFunctions();
 
-  const [padColor, setPadColor] = useState(null); 
+  const padIndex = colIndex * 4 + rowIndex;
+
+  const [padColor, setPadColor] = useState(null);
 
   const colors = [
     ["#4570E6", "#5DADEC", "#76D7EA"],
     ["#FD3A4A", "#FF8866", "#FF9980"],
     ["#FFFF66", "#BEE64B", "#3AA655"],
   ];
-
 
   const inactiveStyle = {
     border: "2px solid darkgray",
@@ -41,12 +39,9 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
     opacity: "100%",
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setPadColor(colors[colorTheme][Math.floor(Math.random() * 3)]);
-  },[colorTheme])
-
-
-  
+  }, [colorTheme]);
 
   const [keyPressedDown, keyPressedUp, setKeyPressedUp] = listeners[padIndex];
 
@@ -62,10 +57,41 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
     setIsActive(updatedStates);
   };
 
+
+  const handleRecordEvent = (mode) => {
+    const playerPadRecording = recordings.filter((recording) => recording.key === padIndex);
+
+    }
+
+
+    // const _metronome = new Tone.Part(
+    //   (time) => {
+    //     players[7].start();
+    //   },
+    //   [[0]]
+    // );
+    // _metronome.start(0);
+    // _metronome.loopEnd = "0:1:0";
+    // _metronome.loop = true;
+    // _metronome.humanize = true;
+    // setMetronome(_metronome);
+
   const downHandler = () => {
-    makeButtonActive();
-    console.log(padIndex, "down", transportTime);
-    players[padIndex].start();
+    if (isRecording && snapMode){
+      makeButtonActive();
+      console.log(padIndex, "down w/ QRecord", quantizeTransportPosition(transportTime));
+      players[padIndex].start();
+    }
+    else if (isRecording && !snapMode){
+      makeButtonActive();
+      console.log(padIndex, "down w/ noQrecord", transportTime);
+      players[padIndex].start();
+    }
+    else if (!isRecording && !snapMode){
+      makeButtonActive();
+      players[padIndex].start();
+      console.log(padIndex, "down with no record");
+    }
   };
 
   const upHandler = () => {
@@ -92,14 +118,15 @@ function PlayerPad({ colorTheme, colIndex, rowIndex }) {
     }
   }, [keyPressedUp]);
 
-
-
-
-  return <div 
-  onMouseDown={downHandler}
-  onMouseUp={upHandler}
-  onMouseLeave={upHandler}
-  className="PlayerPad" style={isActive ? activeStyle : inactiveStyle}></div>;
+  return (
+    <div
+      onMouseDown={downHandler}
+      onMouseUp={upHandler}
+      onMouseLeave={upHandler}
+      className="PlayerPad"
+      style={isActive ? activeStyle : inactiveStyle}
+    ></div>
+  );
 }
 
 export default PlayerPad;
