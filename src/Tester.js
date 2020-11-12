@@ -34,19 +34,17 @@ function Tester() {
     setGameState,
   } = useContext(dataLayer);
 
-  const calcPadIndex = (col, row) => {
-    return col * 4 + row;
+  const calcPadIndex = (row, col) => {
+    return row * 4 + col;
   };
 
   const makePlayPads = () => {
-    return playPads.map((playerCol, rowIndex) => (
+    return playPads.map((playerRow, colIndex) => (
       <div className="donut__padRow">
-        {playerCol.map((player, colIndex) => (
+        {playerRow.map((player, rowIndex) => (
           <PlayerPad
             colorTheme={colorTheme}
-            colIndex={colIndex}
-            rowIndex={rowIndex}
-            primaryIndex={calcPadIndex(rowIndex, colIndex)}
+            padIndex={calcPadIndex(rowIndex, colIndex)}
             isRecording={isRecording}
             quantizeTransportPosition={quantizeTransportPosition}
             snapMode={snapMode}

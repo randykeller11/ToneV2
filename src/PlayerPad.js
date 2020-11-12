@@ -4,7 +4,7 @@ import "./PlayerPad.css";
 import * as Tone from "tone";
 import helperFunctions from "./helperFunctions";
 
-function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording }) {
+function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padIndex }) {
   const {
     players,
     listeners,
@@ -18,8 +18,6 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording }) {
   } = useContext(dataLayer);
 
   const quantizeTransportPosition = helperFunctions();
-
-  const padIndex = colIndex * 4 + rowIndex;
 
   const [padColor, setPadColor] = useState(null);
 
@@ -68,10 +66,10 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording }) {
   };
 
 
-  const handleRecordEvent = (mode) => {
-    const playerPadRecording = recordings.filter((recording) => recording.key === padIndex);
+  // const handleRecordEvent = (mode) => {
+  //   const playerPadRecording = recordings.filter((recording) => recording.key === padIndex);
 
-    }
+  //   }
 
 
     // const _metronome = new Tone.Part(
