@@ -13,6 +13,8 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording }) {
     isPlaying,
     setRecordings,
     recordings,
+    padColorStates,
+    setPadColorStates,
   } = useContext(dataLayer);
 
   const quantizeTransportPosition = helperFunctions();
@@ -42,6 +44,14 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording }) {
   useEffect(() => {
     setPadColor(colors[colorTheme][Math.floor(Math.random() * 3)]);
   }, [colorTheme]);
+
+  useEffect(()=>{
+    if(padColor){
+      const localColorsArray = [...padColorStates];
+      localColorsArray.push({key: padIndex, colorValue: padColor});
+      setPadColorStates(localColorsArray);
+    }
+  },[padColor])
 
   const [keyPressedDown, keyPressedUp, setKeyPressedUp] = listeners[padIndex];
 

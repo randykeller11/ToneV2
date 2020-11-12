@@ -31,6 +31,8 @@ function App() {
 
   const [metronome, setMetronome] = useState(null);
 
+  const [padColorStates, setPadColorStates] = useState([]);
+
   useEffect(() => {
     if (!loading) {
       setGameState(1);
@@ -48,14 +50,19 @@ function App() {
 
   if (gameState === 0) {
     return <h1>loading</h1>;
-  } else if (gameState === 1) {
+  } 
+  
+  // intro screen
+  else if (gameState === 1) {
     return (
       <div className="donut__mainMenu">
         <h1>Welcome to the 🍩 Donut 5000 </h1>
         <button onClick={handleGameStart}>Start</button>
       </div>
     );
-  } else if (gameState === 2) {
+  } 
+  //main play mode
+  else if (gameState === 2) {
     return (
       <dataLayer.Provider
         value={{
@@ -66,11 +73,20 @@ function App() {
           setIsActive,
           setRecordings,
           recordings,
+          padColorStates,
+          setPadColorStates
         }}
       >
           <Tester />
       </dataLayer.Provider>
     );
+      }
+      //click mode that manages metronome and bpm
+      else if (gameState === 3) {
+        return <div>
+            <h1>welcome to click mode</h1>
+            <button onClick={()=>setGameState(2)}>exit</button>
+        </div>
       }
 }
 

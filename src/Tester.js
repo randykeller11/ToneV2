@@ -10,6 +10,7 @@ import useToggle from "./useToggle";
 function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
   const [playPads, setPlayPads] = useState(null);
+  const [playPadColors, setPlayPadColors] = useState([]);
 
   const [isRecording, toggleRecord] = useToggle();
   const [clickMode, toggleClickMode] = useToggle();
@@ -30,7 +31,12 @@ function Tester() {
     setIsActive,
     setRecordings,
     recordings,
+    setGameState,
   } = useContext(dataLayer);
+
+  const calcPadIndex = (col, row) => {
+    return col * 4 + row;
+  };
 
   const makePlayPads = () => {
     return playPads.map((playerCol, rowIndex) => (
@@ -38,11 +44,12 @@ function Tester() {
         {playerCol.map((player, colIndex) => (
           <PlayerPad
             colorTheme={colorTheme}
-            rowIndex={rowIndex}
             colIndex={colIndex}
+            rowIndex={rowIndex}
+            primaryIndex={calcPadIndex(rowIndex, colIndex)}
             isRecording={isRecording}
             quantizeTransportPosition={quantizeTransportPosition}
-            snapMode = {snapMode}
+            snapMode={snapMode}
           />
         ))}
       </div>
@@ -53,6 +60,11 @@ function Tester() {
     const newValue = (colorTheme + 1) % 3;
     setColorTheme(newValue);
   };
+
+  useEffect(() => {
+    if (players) {
+    }
+  }, [colorTheme]);
 
   useEffect(() => {
     const sortedPlayers = [];
@@ -70,6 +82,11 @@ function Tester() {
 
     setPlayPads(sortedPlayers);
   }, []);
+
+  const handleClickModePress = () => {
+    toggleClickMode();
+    setGameState(3);
+  };
 
   return (
     <div className="practice">
@@ -108,7 +125,7 @@ function Tester() {
         </div>
         <div className="transportButtons__buttonBox">
           <div
-            onClick={toggleClickMode}
+            onClick={handleClickModePress}
             className={
               clickMode
                 ? "transportButtons__buttonBox__circleActive"
