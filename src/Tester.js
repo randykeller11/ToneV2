@@ -88,6 +88,8 @@ function Tester() {
 
   return (
     <div className="practice">
+
+      {/*--------------------transport ----------------------------*/}
       <div className="transportButtons">
         <div className="transportButtons__buttonBox">
           <div
@@ -151,13 +153,21 @@ function Tester() {
           <h5 id="buttonBox__description">Snap</h5>
         </div>
       </div>
+
+      {/*--------------------progress bar----------------------------*/}
       <div className="progressBar">
         <LinearProgress variant="determinate" value={25} />
       </div>
+      
+      {/*--------------------16 pads ----------------------------*/}
       <div className="playerPads">{playPads && makePlayPads()}</div>
+
+
+      {/*--------------------toggle sound banks ----------------------------*/}
       <div className="toggleSounds">
         <button onClick={forwardSoundToggle}>New Sound Bank</button>
       </div>
+      {/*-----toggle between play mode, record mode and volume control--------*/}
       <div className="toggleMode"></div>
     </div>
   );

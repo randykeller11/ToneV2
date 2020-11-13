@@ -4,6 +4,7 @@ import useKeyPress from "./useKeyPress";
 import useRecord from "./useRecord";
 import useLoadPlayers from "./useLoadPlayers";
 import useKeyboard from "./useKeyboard";
+import usePadColors from './usePadColors';
 import * as Tone from "tone";
 import Tester from './Tester';
 
@@ -31,7 +32,7 @@ function App() {
 
   const [metronome, setMetronome] = useState(null);
 
-  const [padColorStates, setPadColorStates] = useState([]);
+  const [padColors, padColorsContructor] = usePadColors();
 
   useEffect(() => {
     if (!loading) {
@@ -73,8 +74,7 @@ function App() {
           setIsActive,
           setRecordings,
           recordings,
-          padColorStates,
-          setPadColorStates
+          padColors,
         }}
       >
           <Tester />
