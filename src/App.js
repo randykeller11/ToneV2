@@ -41,8 +41,8 @@ function App() {
   }, [loading]);
 
   const handleGameStart = () => {
-    recordingsConstructor(players);
-    isActiveArrayConstructor(players);
+    recordingsConstructor(players[0]);
+    isActiveArrayConstructor(players[0]);
     setGameState(2);
     Tone.start();
 

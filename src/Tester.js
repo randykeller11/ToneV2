@@ -6,11 +6,13 @@ import PlayerPad from "./PlayerPad";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
 import useTransport from "./useTransport";
 import useToggle from "./useToggle";
+import * as Tone from 'tone';
 
 function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
   const [playPads, setPlayPads] = useState(null);
   const [playPadColors, setPlayPadColors] = useState([]);
+  const [metronomem, setMetronome] = useState(null);
 
   const [isRecording, toggleRecord] = useToggle();
   const [clickMode, toggleClickMode] = useToggle();
@@ -66,7 +68,7 @@ function Tester() {
 
   useEffect(() => {
     const sortedPlayers = [];
-    const localPlayers = [...players];
+    const localPlayers = [...players[0]];
     sortedPlayers.push(localPlayers.filter((player, index) => index < 4));
     sortedPlayers.push(
       localPlayers.filter((player, index) => index >= 4 && index < 8)
@@ -84,6 +86,23 @@ function Tester() {
   const handleClickModePress = () => {
     toggleClickMode();
     setGameState(3);
+  };
+
+  //metronome
+
+  const metronomeButton = () => {
+
+    const _metronome = new Tone.Part(
+      (time) => {
+        players[7].start();
+      },
+      [[0]]
+    );
+    _metronome.start(0);
+    _metronome.loopEnd = "1:0:0";
+    _metronome.loop = true;
+    _metronome.humanize = true;
+    setMetronome(_metronome);
   };
 
   return (
