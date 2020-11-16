@@ -4,8 +4,11 @@ import useKeyPress from "./useKeyPress";
 import useRecord from "./useRecord";
 import useLoadPlayers from "./useLoadPlayers";
 import useKeyboard from "./useKeyboard";
+// import usePadColors from './usePadColors';
 import * as Tone from "tone";
 import Tester from './Tester';
+import TimeStretch from './TimeStretch';
+
 
 export const dataLayer = React.createContext();
 
@@ -31,7 +34,7 @@ function App() {
 
   const [metronome, setMetronome] = useState(null);
 
-  const [padColorStates, setPadColorStates] = useState([]);
+  // const [padColors, padColorsContructor] = usePadColors();
 
   useEffect(() => {
     if (!loading) {
@@ -40,9 +43,9 @@ function App() {
   }, [loading]);
 
   const handleGameStart = () => {
-    recordingsConstructor(players);
-    isActiveArrayConstructor(players);
-    setGameState(2);
+    recordingsConstructor(players[0]);
+    isActiveArrayConstructor(players[0]);
+    setGameState(3);
     Tone.start();
 
   };
@@ -73,8 +76,7 @@ function App() {
           setIsActive,
           setRecordings,
           recordings,
-          padColorStates,
-          setPadColorStates
+          // padColors,
         }}
       >
           <Tester />
@@ -83,10 +85,7 @@ function App() {
       }
       //click mode that manages metronome and bpm
       else if (gameState === 3) {
-        return <div>
-            <h1>welcome to click mode</h1>
-            <button onClick={()=>setGameState(2)}>exit</button>
-        </div>
+        return <TimeStretch />
       }
 }
 

@@ -21,7 +21,9 @@ import perc2 from "./Assets/sounds/perc2.wav";
 import perc3 from "./Assets/sounds/perc3.wav";
 import perc4 from "./Assets/sounds/perc4.wav";
 
-const samples = [
+import _metronome from './Assets/sounds/met.wav';
+
+const samples = [[
   snare,
   snare2,
   snare3,
@@ -38,7 +40,7 @@ const samples = [
   kick2,
   kick3,
   kick4,
-];
+], _metronome];
 
 const useLoadPlayers = () => {
   const [players, setPlayers] = useState(null);
@@ -47,20 +49,19 @@ const useLoadPlayers = () => {
   //load the player and audio buffers
 
   const loadToneBuffers = () => {
-    const playerArray = [];
-    samples.forEach((element) => {
-      playerArray.push(new Tone.Player({ url: element }).toDestination());
+    const playerArray = [[]];
+    samples[0].forEach((element) => {
+      playerArray[0].push(new Tone.Player({ url: element }).toDestination());
     });
 
-    // const kickPlayer = new Tone.Player({
-    //   url: kick,
-    //   loop: true,
-    // }).toDestination();
 
-    // const snarePlayer = new Tone.Player({
-    //   url: snare,
-    //   loop: true,
-    // }).toDestination();
+
+    const metronome = new Tone.Player({
+      url: _metronome,
+      loop: true,
+    }).toDestination();
+
+    playerArray.push(metronome);
 
     // const hhPlayer = new Tone.Player({
     //   url: hh,

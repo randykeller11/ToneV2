@@ -6,11 +6,13 @@ import PlayerPad from "./PlayerPad";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
 import useTransport from "./useTransport";
 import useToggle from "./useToggle";
+import * as Tone from 'tone';
 
 function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
   const [playPads, setPlayPads] = useState(null);
   const [playPadColors, setPlayPadColors] = useState([]);
+  const [metronome, setMetronome] = useState(null);
 
   const [isRecording, toggleRecord] = useToggle();
   const [clickMode, toggleClickMode] = useToggle();
@@ -20,7 +22,7 @@ function Tester() {
     isPlaying,
     usePlayButton,
     bpm,
-    // handleBpmChange,
+    handleBpmChange,
     quantizeTransportPosition,
   ] = useTransport();
 
@@ -66,7 +68,7 @@ function Tester() {
 
   useEffect(() => {
     const sortedPlayers = [];
-    const localPlayers = [...players];
+    const localPlayers = [...players[0]];
     sortedPlayers.push(localPlayers.filter((player, index) => index < 4));
     sortedPlayers.push(
       localPlayers.filter((player, index) => index >= 4 && index < 8)
@@ -81,13 +83,35 @@ function Tester() {
     setPlayPads(sortedPlayers);
   }, []);
 
-  const handleClickModePress = () => {
-    toggleClickMode();
-    setGameState(3);
+  const metronomeButton = () => {
+
+    const _metronome = new Tone.Part(
+      (time) => {
+        players[1].start();
+      },
+      [[0]]
+    );
+    _metronome.start(0);
+    _metronome.loopEnd = "1:0:0";
+    _metronome.loop = true;
+    setMetronome(_metronome);
   };
+
+  const handleClickModePress = () => {
+    handleBpmChange();
+    metronomeButton();
+    toggleClickMode();
+    // setGameState(3);
+  };
+
+  //metronome
+
+
 
   return (
     <div className="practice">
+
+      {/*--------------------transport ----------------------------*/}
       <div className="transportButtons">
         <div className="transportButtons__buttonBox">
           <div
@@ -121,6 +145,8 @@ function Tester() {
           </div>
           <h5 id="buttonBox__description">Undo</h5>
         </div>
+
+        {/*--------------MEtronome!!-------*/}
         <div className="transportButtons__buttonBox">
           <div
             onClick={handleClickModePress}
@@ -151,13 +177,21 @@ function Tester() {
           <h5 id="buttonBox__description">Snap</h5>
         </div>
       </div>
+
+      {/*--------------------progress bar----------------------------*/}
       <div className="progressBar">
         <LinearProgress variant="determinate" value={25} />
       </div>
+      
+      {/*--------------------16 pads ----------------------------*/}
       <div className="playerPads">{playPads && makePlayPads()}</div>
+
+
+      {/*--------------------toggle sound banks ----------------------------*/}
       <div className="toggleSounds">
         <button onClick={forwardSoundToggle}>New Sound Bank</button>
       </div>
+      {/*-----toggle between play mode, record mode and volume control--------*/}
       <div className="toggleMode"></div>
     </div>
   );

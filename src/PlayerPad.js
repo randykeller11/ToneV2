@@ -13,8 +13,6 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padI
     isPlaying,
     setRecordings,
     recordings,
-    padColorStates,
-    setPadColorStates,
   } = useContext(dataLayer);
 
   const quantizeTransportPosition = helperFunctions();
@@ -43,13 +41,6 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padI
     setPadColor(colors[colorTheme][Math.floor(Math.random() * 3)]);
   }, [colorTheme]);
 
-  useEffect(()=>{
-    if(padColor){
-      const localColorsArray = [...padColorStates];
-      localColorsArray.push({key: padIndex, colorValue: padColor});
-      setPadColorStates(localColorsArray);
-    }
-  },[padColor])
 
   const [keyPressedDown, keyPressedUp, setKeyPressedUp] = listeners[padIndex];
 
@@ -88,16 +79,16 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padI
     if (isRecording && snapMode){
       makeButtonActive();
       console.log(padIndex, "down w/ QRecord", quantizeTransportPosition(transportTime));
-      players[padIndex].start();
+      players[0][padIndex].start();
     }
     else if (isRecording && !snapMode){
       makeButtonActive();
       console.log(padIndex, "down w/ noQrecord", transportTime);
-      players[padIndex].start();
+      players[0][padIndex].start();
     }
     else if (!isRecording && !snapMode){
       makeButtonActive();
-      players[padIndex].start();
+      players[0][padIndex].start();
       console.log(padIndex, "down with no record");
     }
   };
