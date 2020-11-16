@@ -12,7 +12,7 @@ function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
   const [playPads, setPlayPads] = useState(null);
   const [playPadColors, setPlayPadColors] = useState([]);
-  const [metronomem, setMetronome] = useState(null);
+  const [metronome, setMetronome] = useState(null);
 
   const [isRecording, toggleRecord] = useToggle();
   const [clickMode, toggleClickMode] = useToggle();
@@ -22,7 +22,7 @@ function Tester() {
     isPlaying,
     usePlayButton,
     bpm,
-    // handleBpmChange,
+    handleBpmChange,
     quantizeTransportPosition,
   ] = useTransport();
 
@@ -83,27 +83,30 @@ function Tester() {
     setPlayPads(sortedPlayers);
   }, []);
 
-  const handleClickModePress = () => {
-    toggleClickMode();
-    setGameState(3);
-  };
-
-  //metronome
-
   const metronomeButton = () => {
 
     const _metronome = new Tone.Part(
       (time) => {
-        players[7].start();
+        players[1].start();
       },
       [[0]]
     );
     _metronome.start(0);
     _metronome.loopEnd = "1:0:0";
     _metronome.loop = true;
-    _metronome.humanize = true;
     setMetronome(_metronome);
   };
+
+  const handleClickModePress = () => {
+    handleBpmChange();
+    metronomeButton();
+    toggleClickMode();
+    // setGameState(3);
+  };
+
+  //metronome
+
+
 
   return (
     <div className="practice">
@@ -142,6 +145,8 @@ function Tester() {
           </div>
           <h5 id="buttonBox__description">Undo</h5>
         </div>
+
+        {/*--------------MEtronome!!-------*/}
         <div className="transportButtons__buttonBox">
           <div
             onClick={handleClickModePress}
