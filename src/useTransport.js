@@ -6,7 +6,7 @@ const useTransport = () => {
   const [bpm, setBpm] = useState(72);
 
   const handleBpmChange = (e) => {
-    setBpm(100);
+    setBpm(e.target.value);
   }
 
 
