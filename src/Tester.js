@@ -12,7 +12,7 @@ function Tester() {
   const [colorTheme, setColorTheme] = useState(0);
   const [playPads, setPlayPads] = useState(null);
   const [playPadColors, setPlayPadColors] = useState([]);
-  const [metronome, setMetronome] = useState(null);
+  // const [metronome, setMetronome] = useState(null);
 
   const [isRecording, toggleRecord] = useToggle();
   const [clickMode, toggleClickMode] = useToggle();
@@ -68,7 +68,7 @@ function Tester() {
 
   useEffect(() => {
     const sortedPlayers = [];
-    const localPlayers = [...players[0]];
+    const localPlayers = [...players];
     sortedPlayers.push(localPlayers.filter((player, index) => index < 4));
     sortedPlayers.push(
       localPlayers.filter((player, index) => index >= 4 && index < 8)
@@ -83,23 +83,23 @@ function Tester() {
     setPlayPads(sortedPlayers);
   }, []);
 
-  const metronomeButton = () => {
+  // const metronomeButton = () => {
 
-    const _metronome = new Tone.Part(
-      (time) => {
-        players[1].start();
-      },
-      [[0]]
-    );
-    _metronome.start(0);
-    _metronome.loopEnd = "1:0:0";
-    _metronome.loop = true;
-    setMetronome(_metronome);
-  };
+  //   const _metronome = new Tone.Part(
+  //     (time) => {
+  //       players[1].start();
+  //     },
+  //     [[0]]
+  //   );
+  //   _metronome.start(0);
+  //   _metronome.loopEnd = "1:0:0";
+  //   _metronome.loop = true;
+  //   setMetronome(_metronome);
+  // };
 
   const handleClickModePress = () => {
     handleBpmChange();
-    metronomeButton();
+    // metronomeButton();
     toggleClickMode();
     // setGameState(3);
   };

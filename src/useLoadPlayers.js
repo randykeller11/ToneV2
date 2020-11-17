@@ -1,46 +1,44 @@
 import { useState, useEffect } from "react";
 import * as Tone from "tone";
 
-import snare from "./Assets/sounds/snare.wav";
-import snare2 from "./Assets/sounds/snare2.wav";
-import snare3 from "./Assets/sounds/snare3.wav";
-import snare4 from "./Assets/sounds/snare4.wav";
+import snare0 from "./Assets/glazeDrums/snare0.wav";
+import snare1 from "./Assets/glazeDrums/snare1.wav";
+import snare2 from "./Assets/glazeDrums/snare2.wav";
+import snare3 from "./Assets/glazeDrums/snare3.wav";
 
-import kick from "./Assets/sounds/kick.wav";
-import kick2 from "./Assets/sounds/kick2.wav";
-import kick3 from "./Assets/sounds/kick3.wav";
-import kick4 from "./Assets/sounds/kick4.wav";
+import kick0 from "./Assets/glazeDrums/kick0.wav";
+import kick1 from "./Assets/glazeDrums/kick1.wav";
+import kick2 from "./Assets/glazeDrums/kick2.wav";
+import kick3 from "./Assets/glazeDrums/kick3.wav";
 
-import hit from "./Assets/sounds/hit.wav";
-import hit2 from "./Assets/sounds/hit2.wav";
-import hit3 from "./Assets/sounds/hit3.wav";
-import hit4 from "./Assets/sounds/hit4.wav";
+import hit0 from "./Assets/glazeDrums/hit0.wav";
+import hit1 from "./Assets/glazeDrums/hit1.wav";
+import hit2 from "./Assets/glazeDrums/hit2.wav";
+import hit3 from "./Assets/glazeDrums/hit3.wav";
 
-import perc from "./Assets/sounds/perc.wav";
-import perc2 from "./Assets/sounds/perc2.wav";
-import perc3 from "./Assets/sounds/perc3.wav";
-import perc4 from "./Assets/sounds/perc4.wav";
+import loop0 from "./Assets/glazeDrums/loop0.wav";
+import loop1 from "./Assets/glazeDrums/loop1.wav";
+import loop2 from "./Assets/glazeDrums/loop2.wav";
+import loop3 from "./Assets/glazeDrums/loop3.wav";
 
-import _metronome from './Assets/sounds/met.wav';
-
-const samples = [[
-  snare,
+const samples = [
+  snare0,
+  snare1,
   snare2,
   snare3,
-  snare4,
-  hit,
+  hit0,
+  hit1,
   hit2,
   hit3,
-  hit4,
-  perc,
-  perc2,
-  perc3,
-  perc4,
-  kick,
+  kick0,
+  kick1,
   kick2,
   kick3,
-  kick4,
-], _metronome];
+  loop0,
+  loop1,
+  loop2,
+  loop3,
+];
 
 const useLoadPlayers = () => {
   const [players, setPlayers] = useState(null);
@@ -49,19 +47,11 @@ const useLoadPlayers = () => {
   //load the player and audio buffers
 
   const loadToneBuffers = () => {
-    const playerArray = [[]];
-    samples[0].forEach((element) => {
-      playerArray[0].push(new Tone.Player({ url: element }).toDestination());
+    const playerArray = [];
+    samples.forEach((element) => {
+      playerArray.push(new Tone.Player({ url: element }).toDestination());
     });
 
-
-
-    const metronome = new Tone.Player({
-      url: _metronome,
-      loop: true,
-    }).toDestination();
-
-    playerArray.push(metronome);
 
     // const hhPlayer = new Tone.Player({
     //   url: hh,

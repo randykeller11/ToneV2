@@ -79,16 +79,16 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padI
     if (isRecording && snapMode){
       makeButtonActive();
       console.log(padIndex, "down w/ QRecord", quantizeTransportPosition(transportTime));
-      players[0][padIndex].start();
+      players[padIndex].start();
     }
     else if (isRecording && !snapMode){
       makeButtonActive();
       console.log(padIndex, "down w/ noQrecord", transportTime);
-      players[0][padIndex].start();
+      players[padIndex].start();
     }
     else if (!isRecording && !snapMode){
       makeButtonActive();
-      players[0][padIndex].start();
+      players[padIndex].start();
       console.log(padIndex, "down with no record");
     }
   };
