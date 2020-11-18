@@ -8,14 +8,15 @@ import useKeyboard from "./useKeyboard";
 import * as Tone from "tone";
 import Tester from './Tester';
 import TimeStretch from './TimeStretch';
+import GameMode from './GameMode';
 
 
 export const dataLayer = React.createContext();
 
 function App() {
-  const [gameState, setGameState] = useState(0);
+  const [gameState, setGameState] = useState(3);
 
-  const [players, loading] = useLoadPlayers();
+  // const [players, loading] = useLoadPlayers();
   const listeners = useKeyboard();
 
 
@@ -36,19 +37,19 @@ function App() {
 
   // const [padColors, padColorsContructor] = usePadColors();
 
-  useEffect(() => {
-    if (!loading) {
-      setGameState(1);
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   if (!loading) {
+  //     setGameState(1);
+  //   }
+  // }, [loading]);
 
-  const handleGameStart = () => {
-    recordingsConstructor(players);
-    isActiveArrayConstructor(players);
-    setGameState(2);
-    Tone.start();
+  // const handleGameStart = () => {
+  //   recordingsConstructor(players);
+  //   isActiveArrayConstructor(players);
+  //   setGameState(2);
+  //   Tone.start();
 
-  };
+  // };
 
 
   if (gameState === 0) {
@@ -60,32 +61,32 @@ function App() {
     return (
       <div className="donut__mainMenu">
         <h1>Welcome to the 🍩 Donut 5000 </h1>
-        <button onClick={handleGameStart}>Start</button>
+        {/* <button onClick={handleGameStart}>Start</button> */}
       </div>
     );
   } 
   //main play mode
   else if (gameState === 2) {
     return (
-      <dataLayer.Provider
-        value={{
-          players,
-          listeners,
-          setGameState,
-          isActiveArray,
-          setIsActive,
-          setRecordings,
-          recordings,
-          // padColors,
-        }}
-      >
+      // <dataLayer.Provider
+      //   value={{
+      //     players,
+      //     listeners,
+      //     setGameState,
+      //     isActiveArray,
+      //     setIsActive,
+      //     setRecordings,
+      //     recordings,
+      //     // padColors,
+      //   }}
+      // >
           <Tester />
-      </dataLayer.Provider>
+      // </dataLayer.Provider>
     );
       }
-      //click mode that manages metronome and bpm
+      //testing new architecture
       else if (gameState === 3) {
-        return <TimeStretch />
+        return <GameMode/>
       }
 }
 
