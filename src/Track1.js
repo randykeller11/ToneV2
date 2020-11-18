@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import useLoadPlayers from "./useLoadPlayers";
+import useTrack1Players from './useTrack1Players';
 
-function Track0() {
-  const [players, loading] = useLoadPlayers();
+function Track1() {
+  const [players, loading] = useTrack1Players();
   const [message, setMessage] = useState();
 
   useEffect(() => {
@@ -17,10 +17,10 @@ function Track0() {
 
   return (
     <div>
-      <h1>first component connected</h1>
+      <h1>second component connected</h1>
       <h1>{message && message}</h1>
     </div>
   );
 }
 
-export default Track0;
+export default Track1;
