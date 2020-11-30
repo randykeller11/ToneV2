@@ -14,6 +14,12 @@
 }
 
 @media (max-width: 850px) {
+    .trackTogglers{
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        border: 2px solid black;
+    }
     .trackToggler_button {
         border: 2px solid lightgray;
         height: 2.5em;
