@@ -1,0 +1,104 @@
+.transportButtons{
+    /* border: 2px solid green; */
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 1.5vh;
+    padding-bottom: 1vh;
+}
+
+.transportButtons__buttonBox{
+    display: flex;
+    flex-flow: column;
+    text-align: center;
+
+}
+
+
+
+.transportButtons__buttonBox__circleInactive{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid rgb(55, 0, 255);
+
+}
+
+.transportButtons__buttonBox__circleActive{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 4px solid rgb(0, 225, 255);
+
+}
+#buttonBox__description{
+    margin-top: 4px;
+    color: rgb(43, 16, 139);
+}
+
+#transportIcon{
+    padding-top: 2.75px;
+}
+
+#transport__snapCircleContents{
+    display: flex;
+    padding-top: 9.75px;
+}
+
+.toggleMode{
+    margin-top: 7vh;
+    border-top: 3.5px solid rgba(94, 59, 190, 0.295);
+    padding-bottom: 9vh;
+}
+
+
+
+@media (max-width: 850px) {
+
+
+    .progressBar{
+        padding-top: 2vh;
+    }
+    .transportButtons{
+        /* border: 2px solid green; */
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 3vh;
+        padding-bottom: 1vh;
+    }
+
+    .toggleMode{
+        margin-top: 10vh;
+        border-top: 3.5px solid rgba(94, 59, 190, 0.295);
+        padding-bottom: 9vh;
+    }
+
+    .transportButtons__buttonBox__circleInactive{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: 2px solid rgb(55, 0, 255);
+    
+    }
+    
+    .transportButtons__buttonBox__circleActive{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: 4px solid rgb(0, 225, 255);
+    
+    }
+
+    .transportButtons__buttonBox{
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+    }
+
+    #buttonBox__description{
+        margin-top: 4px;
+        color: rgb(43, 16, 139);
+
+    }
+}
+
+
