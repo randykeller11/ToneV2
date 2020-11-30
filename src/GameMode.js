@@ -4,9 +4,9 @@ import { LinearProgress } from "@material-ui/core/";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
 import useToggle from "./useToggle";
 import "./GameMode.css";
+import PresetBank0 from "./PresetBank0";
 
-const Track0 = React.lazy(() => import("./Track0"));
-const Track1 = React.lazy(() => import("./Track1"));
+const Track0 = React.lazy(() => import("./PresetBank0"));
 
 function GameMode() {
   const [presetBank, setPresetBank] = useState(false);
@@ -100,7 +100,7 @@ function GameMode() {
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-          <Track1 />
+          <PresetBank0 isRecording={isRecording} snapMode={snapMode}/>
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}

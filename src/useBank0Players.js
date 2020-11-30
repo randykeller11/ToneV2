@@ -40,7 +40,7 @@ const samples = [
   loop3,
 ];
 
-const useLoadPlayers = () => {
+const useBank0Players = () => {
   const [players, setPlayers] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -75,4 +75,4 @@ const useLoadPlayers = () => {
   return [players, loading];
 };
 
-export default useLoadPlayers;
+export default useBank0Players;
