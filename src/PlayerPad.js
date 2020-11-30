@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { dataLayer } from "./App";
 import "./PlayerPad.css";
 import * as Tone from "tone";
-import helperFunctions from "./helperFunctions";
+import {quantizeTransportPosition} from "./helperFunctions";
 
 function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padIndex }) {
   const {
@@ -15,15 +15,9 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padI
     recordings,
   } = useContext(dataLayer);
 
-  const quantizeTransportPosition = helperFunctions();
 
   const [padColor, setPadColor] = useState(null);
 
-  const colors = [
-    ["#4570E6", "#5DADEC", "#76D7EA"],
-    ["#FD3A4A", "#FF8866", "#FF9980"],
-    ["#FFFF66", "#BEE64B", "#3AA655"],
-  ];
 
   const inactiveStyle = {
     border: "2px solid darkgray",
@@ -37,9 +31,6 @@ function PlayerPad({ colorTheme, colIndex, rowIndex, snapMode, isRecording, padI
     opacity: "100%",
   };
 
-  useEffect(() => {
-    setPadColor(colors[colorTheme][Math.floor(Math.random() * 3)]);
-  }, [colorTheme]);
 
 
   const [keyPressedDown, keyPressedUp, setKeyPressedUp] = listeners[padIndex];
