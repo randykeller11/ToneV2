@@ -10,7 +10,7 @@ function PlayPads({ currentTrack }) {
     ["#4570E6", "#5DADEC", "#76D7EA"],
     ["#FD3A4A", "#FF8866", "#FF9980"],
     ["#FFFF66", "#BEE64B", "#3AA655"],
-    ["#BA55D3", "#9400D3", "#4B0082"],
+    ["#BA55D3", "#9400D3", "#9370DB"],
   ];
 
   const [trackMap0, loadingTrackMap0] = usePlayPadColors();

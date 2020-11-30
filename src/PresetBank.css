@@ -1,0 +1,25 @@
+.trackTogglers{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    padding-top: 20vh;
+}
+
+.trackToggler_button {
+    height: 5em;
+    width: 10em;
+    margin: 5px;
+    border-radius: 10%;
+
+}
+
+@media (max-width: 850px) {
+    .trackToggler_button {
+        border: 2px solid lightgray;
+        height: 2.5em;
+        width: 5em;
+        margin: 5px;
+        border-radius: 10%;
+    
+    }
+}
