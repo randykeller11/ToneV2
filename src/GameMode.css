@@ -45,9 +45,9 @@
 }
 
 .toggleMode{
-    margin-top: 7vh;
+    margin-top: 30vh;
     border-top: 3.5px solid rgba(94, 59, 190, 0.295);
-    padding-bottom: 9vh;
+    padding-bottom: 4vh;
 }
 
 
@@ -67,7 +67,7 @@
     }
 
     .toggleMode{
-        margin-top: 10vh;
+        margin-top: 20vh;
         border-top: 3.5px solid rgba(94, 59, 190, 0.295);
         padding-bottom: 9vh;
     }

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import PlayPad from "./PlayPad";
 import usePlayPadColors from "./usePlayPadColors";
 import { sortPadColorMap } from "./helperFunctions";
+import './PlayPads.css';
 
 
 function PlayPads({ currentTrack }) {
@@ -74,7 +75,7 @@ function PlayPads({ currentTrack }) {
   }, [colorsSorted, currentTrack]);
 
 
-  return <div>{targetRender ? targetRender : <h1>loading</h1>}</div>;
+  return <div className="playPads">{targetRender ? targetRender : <h1>loading</h1>}</div>;
 }
 
 export default PlayPads;
