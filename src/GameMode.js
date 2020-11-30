@@ -100,9 +100,7 @@ function GameMode() {
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-        <transportData.Provider value={providerValue}>
           <Track1 />
-        </transportData.Provider>
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}
