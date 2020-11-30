@@ -1,0 +1,17 @@
+.playPad{
+    height: 10em;
+    width: 10em;
+    margin: 5px;
+    border-radius: 10%;
+}
+
+
+@media (max-width: 850px) {
+    .playPad{
+        height: 6.75em;
+        width: 6.75em;
+        margin: 5px;
+        border-radius: 10%;
+
+    }
+  }

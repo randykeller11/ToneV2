@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import PlayerPad from "./PlayerPad";
+import PlayPad from "./PlayPad";
 import usePlayPadColors from "./usePlayPadColors";
 import { sortPadColorMap } from "./helperFunctions";
+
 
 function PlayPads({ currentTrack }) {
   const trackColors = [
@@ -20,6 +21,7 @@ function PlayPads({ currentTrack }) {
 
   const [targetRender, setTargetRender] = useState(null);
   const [colorsLoaded, setColorsLoaded] = useState(false);
+  const [colorsSorted, setColorsSorted] = useState(false);
 
   const checkColorsLoaded = () => {
     if (
@@ -44,26 +46,33 @@ function PlayPads({ currentTrack }) {
         sortPadColorMap(trackMap2),
         sortPadColorMap(trackMap3),
       ]);
-      setTargetRender(<h1>colors are loaded broski</h1>);
+      setColorsSorted(true);
     }
   }, [colorsLoaded]);
 
-  // const calcPadIndex = (row, col) => {
-  //     return row * 4 + col;
-  //   };
+  const calcPadIndex = (row, col) => {
+    return row * 4 + col;
+  };
 
-  // const makePlayPads = (_padColorMap) => {
-  //     _padColorMap.map((playerRow, colIndex) => (
-  //         <div className="donut__padRow">
-  //           {playerRow.map((player, rowIndex) => (
-  //             <PlayerPad
-  //               padColor = {trackColors[calcPadIndex(rowIndex, colIndex)]}
-  //               padIndex={calcPadIndex(rowIndex, colIndex)}
-  //             />
-  //           ))}
-  //         </div>
-  //       ));
-  // }
+  useEffect(() => {
+    if (colorsSorted) {
+      const localTarget = colorMap[currentTrack].map((padRow, colIndex) => (
+        <div className="donut__padRow">
+          {padRow.map((colorValue, rowIndex) => (
+            <PlayPad
+              padColor={
+                trackColors[currentTrack][colorValue]
+              }
+              padIndex={calcPadIndex(rowIndex, colIndex)}
+            />
+          ))}
+        </div>
+      ));
+
+      setTargetRender(localTarget);
+    }
+  }, [colorsSorted, currentTrack]);
+
 
   return <div>{targetRender ? targetRender : <h1>loading</h1>}</div>;
 }
