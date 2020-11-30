@@ -45,7 +45,7 @@ function App() {
   const handleGameStart = () => {
     recordingsConstructor(players[0]);
     isActiveArrayConstructor(players[0]);
-    setGameState(3);
+    setGameState(2);
     Tone.start();
 
   };
@@ -63,7 +63,7 @@ function App() {
         <button onClick={handleGameStart}>Start</button>
       </div>
     );
-  } 
+  }
   //main play mode
   else if (gameState === 2) {
     return (
