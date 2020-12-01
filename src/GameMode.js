@@ -25,6 +25,11 @@ function GameMode() {
 
   return (
     <div className="mainGame">
+      <div className="togglePreset"
+        style={{display: "flex", justifyContent: "center"}}
+      >
+        <h1> 🍩 Donut 5000</h1>
+      </div>
       {/*-------------------Transport Buttons----------------------------*/}
 
       <div className="transportButtons">
@@ -108,6 +113,8 @@ function GameMode() {
       <div className="toggleMode">
         <h5> Mode toggle buttons</h5>
       </div>
+
+
     </div>
   );
 }

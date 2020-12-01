@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     margin: 1vh;
-    height: 50vh;
 }
 
 @media (max-width: 850px) {

@@ -1,3 +1,8 @@
+.togglePreset{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
 .transportButtons{
     /* border: 2px solid green; */
     display: flex;
@@ -44,10 +49,16 @@
     padding-top: 9.75px;
 }
 
+/* .bodyContainer{
+    display: flex;
+    justify-content: start;
+    flex-flow: column;
+} */
+
 .toggleMode{
-    margin-top: 30vh;
     border-top: 3.5px solid rgba(94, 59, 190, 0.295);
     padding-bottom: 4vh;
+    margin-top: 5vh;
 }
 
 
