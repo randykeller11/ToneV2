@@ -1,0 +1,15 @@
+.trackToggler_button {
+  height: 5em;
+  width: 10em;
+  margin: 5px;
+  border-radius: 10%;
+}
+
+@media (max-width: 850px) {
+  .trackToggler_button {
+    height: 2.5em;
+    width: 5em;
+    margin: 5px;
+    border-radius: 10%;
+  }
+}

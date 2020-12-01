@@ -1,0 +1,18 @@
+.trackTogglers{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    padding-top: 20vh;
+}
+
+
+
+@media (max-width: 850px) {
+    .trackTogglers{
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        border: 2px solid black;
+    }
+
+}

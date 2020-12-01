@@ -41,19 +41,7 @@ function Tester() {
   };
 
   const makePlayPads = () => {
-    return playPads.map((playerRow, colIndex) => (
-      <div className="donut__padRow">
-        {playerRow.map((player, rowIndex) => (
-          <PlayerPad
-            colorTheme={colorTheme}
-            padIndex={calcPadIndex(rowIndex, colIndex)}
-            isRecording={isRecording}
-            quantizeTransportPosition={quantizeTransportPosition}
-            snapMode={snapMode}
-          />
-        ))}
-      </div>
-    ));
+    return 
   };
 
   const forwardSoundToggle = () => {

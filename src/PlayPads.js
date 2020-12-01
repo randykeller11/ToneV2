@@ -5,7 +5,8 @@ import { sortPadColorMap } from "./helperFunctions";
 import './PlayPads.css';
 
 
-function PlayPads({ currentTrack }) {
+function PlayPads({currentTrack}) {
+
   const trackColors = [
     ["#4570E6", "#5DADEC", "#76D7EA"],
     ["#FD3A4A", "#FF8866", "#FF9980"],

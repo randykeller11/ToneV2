@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PlayPads from "./PlayPads";
 import useBank0Players from "./useBank0Players";
 import "./PresetBank.css";
+import TrackToggle from './TrackToggle';
 
 export const presetBankData = React.createContext();
 
@@ -14,6 +15,8 @@ function PresetBank0({ snapMode, isRecording }) {
     players,
     snapMode,
     isRecording,
+    setCurrentTrack,
+    currentTrack,
   };
 
   if (presetMode === 0) {
@@ -21,29 +24,10 @@ function PresetBank0({ snapMode, isRecording }) {
       <div className="presetBank">
         <presetBankData.Provider value={contextValue}>
           <PlayPads currentTrack={currentTrack} />
+          <TrackToggle/>
         </presetBankData.Provider>
-        <div className="trackTogglers">
-          <div
-            className="trackToggler_button"
-            onClick={() => setCurrentTrack(0)}
-            style={{backgroundColor: "#5DADEC"}}
-          ></div>
-          <div
-            className="trackToggler_button"
-            onClick={() => setCurrentTrack(1)}
-            style={{backgroundColor: "#FF8866"}}
-          ></div>
-          <div
-            className="trackToggler_button"
-            onClick={() => setCurrentTrack(2)}
-            style={{backgroundColor: "#BEE64B"}}
-          ></div>
-          <div
-            className="trackToggler_button"
-            onClick={() => setCurrentTrack(3)}
-            style={{backgroundColor: "#9400D3"}}
-          ></div>
-        </div>
+
+
       </div>
     );
   } else return <h1>wait on it</h1>;
