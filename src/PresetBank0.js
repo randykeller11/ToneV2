@@ -23,6 +23,7 @@ function PresetBank0({ snapMode, isRecording }) {
     isRecording,
     setCurrentTrack,
     currentTrack,
+    dispatch,
   };
 
   if (presetMode === 0) {

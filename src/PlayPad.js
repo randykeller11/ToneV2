@@ -1,7 +1,12 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import './PlayPad.css';
+import {presetBankData} from './PresetBank0';
 
 function PlayPad({padColor, padIndex}) {
+
+    const {dispatch, currentTrack} = useContext(presetBankData);
+
+    const padLocation = {padIndex: padIndex, trackIndex: currentTrack}
 
     const [isActive, setIsActive] = useState(false);
 
@@ -19,7 +24,9 @@ function PlayPad({padColor, padIndex}) {
 
     return (
         <div className="playPad"
-        style={isActive ? activeStyle : inactiveStyle}>
+        style={isActive ? activeStyle : inactiveStyle}
+        onClick={()=>dispatch({type: 'activate', payload: padLocation})}
+        >
         </div>
     );
 }
