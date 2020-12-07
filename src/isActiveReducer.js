@@ -4,20 +4,21 @@ export const initialState = isActiveConstructor();
 
 const ACTIONS = {
   ACTIVATE: "activate",
+  DEACTIVATE: "deactivate",
 };
 
-const makeActive = (trackIndex, padIndex, isActiveArray) => {
+const editValue = (trackIndex, padIndex, isActiveArray, newValue) => {
   let localTrack = isActiveArray.find(
     (track) => track.trackIndex === trackIndex
   );
-   let newValue = localTrack.activeArray.map((pad) => {
+  let newPadState = localTrack.activeArray.map((pad) => {
     if (pad.key === padIndex) {
-      return { ...pad, isActive: true };
+      return { ...pad, isActive: newValue };
     } else {
       return pad;
     }
   });
-  return newValue;
+  return newPadState;
 };
 
 export const isActiveReducer = (isActiveArray, action) => {
@@ -28,10 +29,11 @@ export const isActiveReducer = (isActiveArray, action) => {
           if (track.trackIndex === action.payload.trackIndex) {
             return {
               ...track,
-              activeArray: makeActive(
+              activeArray: editValue(
                 action.payload.trackIndex,
                 action.payload.padIndex,
-                isActiveArray
+                isActiveArray,
+                true,
               ),
             };
           }
@@ -39,5 +41,21 @@ export const isActiveReducer = (isActiveArray, action) => {
         });
       }
       break;
+    case ACTIONS.DEACTIVATE: {
+      return isActiveArray.map((track) => {
+        if (track.trackIndex === action.payload.trackIndex) {
+          return {
+            ...track,
+            activeArray: editValue(
+              action.payload.trackIndex,
+              action.payload.padIndex,
+              isActiveArray,
+              false,
+            ),
+          };
+        }
+        return track;
+      });
+    }
   }
 };

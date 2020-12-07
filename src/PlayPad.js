@@ -4,7 +4,7 @@ import {presetBankData} from './PresetBank0';
 
 function PlayPad({padColor, padIndex}) {
 
-    const {dispatch, currentTrack, isActiveArray} = useContext(presetBankData);
+    const {dispatch, currentTrack, isActiveArray, players} = useContext(presetBankData);
 
     const [isActive, setisActive] = useState(false);
 
@@ -30,10 +30,21 @@ function PlayPad({padColor, padIndex}) {
        setisActive(accurateTarget.isActive);
       },[accurateTarget])
 
+      const downHandler = () => {
+        dispatch({type: 'activate', payload: padLocation});
+        players[padIndex].start();
+      }
+
+      const upHandler = () => {
+        dispatch({type: 'deactivate', payload: padLocation});
+      }
+
     return (
         <div className="playPad"
         style={isActive ? activeStyle : inactiveStyle}
-        onClick={()=>dispatch({type: 'activate', payload: padLocation})}
+        onClick={downHandler}
+        onMouseUp={upHandler}
+        onMouseLeave={upHandler}
         >
         </div>
     );
