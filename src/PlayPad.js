@@ -42,9 +42,8 @@ function PlayPad({padColor, padIndex}) {
     return (
         <div className="playPad"
         style={isActive ? activeStyle : inactiveStyle}
-        onClick={downHandler}
+        onMouseDown={downHandler}
         onMouseUp={upHandler}
-        onMouseLeave={upHandler}
         >
         </div>
     );
