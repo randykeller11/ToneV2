@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import PlayPads from "./PlayPads";
 import useBank0Players from "./useBank0Players";
 import "./PresetBank.css";
 import TrackToggle from './TrackToggle';
+import {initialState, isActiveReducer} from './isActiveReducer';
 
 export const presetBankData = React.createContext();
 
+
+
+
+
 function PresetBank0({ snapMode, isRecording }) {
+  const [state, dispatch] = useReducer(isActiveReducer, initialState);
   const [players, loading] = useBank0Players();
   const [currentTrack, setCurrentTrack] = useState(0);
   const [presetMode, setPresetMode] = useState(0);

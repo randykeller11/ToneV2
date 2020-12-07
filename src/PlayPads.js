@@ -14,6 +14,7 @@ function PlayPads({currentTrack}) {
     ["#BA55D3", "#9400D3", "#9370DB"],
   ];
 
+
   const [trackMap0, loadingTrackMap0] = usePlayPadColors();
   const [trackMap1, loadingTrackMap1] = usePlayPadColors();
   const [trackMap2, loadingTrackMap2] = usePlayPadColors();
