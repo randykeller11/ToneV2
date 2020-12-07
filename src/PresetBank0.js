@@ -12,7 +12,7 @@ export const presetBankData = React.createContext();
 
 
 function PresetBank0({ snapMode, isRecording }) {
-  const [state, dispatch] = useReducer(isActiveReducer, initialState);
+  const [isActiveArray, dispatch] = useReducer(isActiveReducer, initialState);
   const [players, loading] = useBank0Players();
   const [currentTrack, setCurrentTrack] = useState(0);
   const [presetMode, setPresetMode] = useState(0);
@@ -24,6 +24,7 @@ function PresetBank0({ snapMode, isRecording }) {
     setCurrentTrack,
     currentTrack,
     dispatch,
+    isActiveArray,
   };
 
   if (presetMode === 0) {
