@@ -22,13 +22,13 @@ function PlayPad({padColor, padIndex}) {
         opacity: "100%",
       };
 
-      const activePadTarget = isActiveArray.find((track) => track.trackIndex === currentTrack);
+      const activeTrackTarget = isActiveArray.find((track) => track.trackIndex === currentTrack);
 
-      const accurateTarget = activePadTarget.activeArray.find((pad)=> pad.key === padIndex);
+      const activePadTarget = activeTrackTarget.activeArray.find((pad)=> pad.key === padIndex);
 
       useEffect(()=>{
-       setisActive(accurateTarget.isActive);
-      },[accurateTarget])
+       setisActive(activePadTarget.isActive);
+      },[activePadTarget])
 
       const downHandler = () => {
         dispatch({type: 'activate', payload: padLocation});
