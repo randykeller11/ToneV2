@@ -32,7 +32,7 @@ function PlayPad({padColor, padIndex}) {
 
       const downHandler = () => {
         dispatch({type: 'activate', payload: padLocation});
-        players[padIndex].start();
+        players[currentTrack][padIndex].start();
       }
 
       const upHandler = () => {
