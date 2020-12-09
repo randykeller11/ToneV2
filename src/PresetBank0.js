@@ -21,20 +21,21 @@ function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
   const [players, loading] = useBank0Players();
   const [currentTrack, setCurrentTrack] = useState(0);
   const [presetMode, setPresetMode] = useState(0);
-  const [padsRecording, setPadsRecording] = useState(false);
+  const [padsRecMode, setPadsRecMode] = useState(0);
   const [recModeState, setRecModeState] = useState(0);
   const [metronome, setMetronome] = useState(null);
 
   const contextValue = {
     players,
     snapMode,
-    padsRecording,
+    padsRecMode,
     setCurrentTrack,
     currentTrack,
     activeDispatch,
     isActiveArray,
     recState,
     recDispatch,
+    setPadsRecMode,
   };
 
   const constructMet = () => {
@@ -50,28 +51,53 @@ function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
     setMetronome(_metronome);
   };
 
+  //just for initiating if not playing for right now!!!
   const recordModeLogic = () => {
-
-    constructMet();
+    //schedule a restart a 0 after four bars of metronome
     Tone.Transport.scheduleOnce(() => {
       setRecModeState(1);
       Tone.Transport.position = "0:0:0";
     }, "1:0:0");
-    Tone.Transport.scheduleRepeat(()=>{
+    //console log the time
+    Tone.Transport.scheduleRepeat(() => {
       console.log(Tone.Transport.position);
     }, "16n");
-
+    //start transport
     Tone.Transport.start("+0.1", 0);
   };
 
-  useEffect(()=>{
-    if(recModeState === 1){
-      console.log('put recording logic here');
+  //start of not playing recording logic
+
+  useEffect(() => {
+    if (recModeState === 1) {
+      if (!clickMode) {
+        metronome.mute = true;
+      }
+      setPadsRecMode(1);
+      console.log("put recording logic here");
+      Tone.Transport.scheduleOnce(() => {
+        setRecModeState(2);
+      }, "4:0:0");
     }
-  },[recModeState])
+  }, [recModeState]);
+
+  //end of recording logic
+
+  useEffect(() => {
+    if (recModeState === 2) {
+      setPadsRecMode(2);
+      console.log("put end of recording logic here");
+      Tone.Transport.stop();
+      Tone.Transport.position = "0:0:0";
+      Tone.Transport.start("+.01");
+    }
+  }, [recModeState]);
 
   useEffect(() => {
     if (isRecording) {
+      if (recModeState === 0) {
+        constructMet();
+      }
       recordModeLogic();
     }
   }, [isRecording]);
@@ -80,7 +106,7 @@ function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
     return (
       <div className="presetBank">
         <presetBankData.Provider value={contextValue}>
-          <PlayPads currentTrack={currentTrack} />
+          <PlayPads />
           <TrackToggle />
         </presetBankData.Provider>
       </div>

@@ -76,6 +76,7 @@ function GameMode() {
                 ? "transportButtons__buttonBox__circleActive"
                 : "transportButtons__buttonBox__circleInactive"
             }
+            onClick={toggleClickMode}
           >
             <Schedule id="transportIcon" fontSize="large" color="primary" />
           </div>
