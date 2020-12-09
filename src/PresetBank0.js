@@ -21,6 +21,7 @@ function PresetBank0({ snapMode, isRecording, isPlaying }) {
   const [currentTrack, setCurrentTrack] = useState(0);
   const [presetMode, setPresetMode] = useState(0);
   const [padsRecording, setPadsRecording] = useState(false);
+  const [recModeState, setRecModeState] = useState(0);
 
   const contextValue = {
     players,

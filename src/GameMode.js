@@ -105,7 +105,7 @@ function GameMode() {
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-          <PresetBank0 isRecording={isRecording} snapMode={snapMode}/>
+          <PresetBank0 isRecording={isRecording} snapMode={snapMode} isPlaying={isPlaying}/>
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}
