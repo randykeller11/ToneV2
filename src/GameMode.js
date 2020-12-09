@@ -23,6 +23,8 @@ function GameMode() {
     quantizeTransportPosition,
   ] = useTransport();
 
+  
+
   return (
     <div className="mainGame">
       <div className="togglePreset"
@@ -105,7 +107,7 @@ function GameMode() {
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-          <PresetBank0 isRecording={isRecording} snapMode={snapMode} isPlaying={isPlaying}/>
+          <PresetBank0 isRecording={isRecording} snapMode={snapMode} isPlaying={isPlaying} clickMode={clickMode}/>
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}

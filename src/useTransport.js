@@ -18,12 +18,16 @@ const useTransport = () => {
 
 
   const usePlayButton = () => {
-    if (!isPlaying) {
+    if (Tone.Transport.state === 'stopped') {
       setIsPlaying(true);
-      Tone.Transport.start("+0.1");
+          Tone.Transport.scheduleRepeat(()=>{
+      console.log(Tone.Transport.position);
+    }, "16n");
+      Tone.Transport.start("+0.1","1:0:0");
     } else {
       setIsPlaying(false);
       Tone.Transport.stop();
+      Tone.Transport.position = '0:0:0';
     }
   };
 

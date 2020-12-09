@@ -1,4 +1,5 @@
 import React, { useState, useReducer, useEffect } from "react";
+import * as Tone from "tone";
 import PlayPads from "./PlayPads";
 import useBank0Players from "./useBank0Players";
 import "./PresetBank.css";
@@ -8,20 +9,21 @@ import { initialRecState, recordingsReducer } from "./recordingsReducer";
 
 export const presetBankData = React.createContext();
 
-function PresetBank0({ snapMode, isRecording, isPlaying }) {
+function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
   const [isActiveArray, activeDispatch] = useReducer(
     isActiveReducer,
     initialState
   );
   const [recState, recDispatch] = useReducer(
     recordingsReducer,
-    initialRecState,
+    initialRecState
   );
-  const [players, Ploading] = useBank0Players();
+  const [players, loading] = useBank0Players();
   const [currentTrack, setCurrentTrack] = useState(0);
   const [presetMode, setPresetMode] = useState(0);
   const [padsRecording, setPadsRecording] = useState(false);
   const [recModeState, setRecModeState] = useState(0);
+  const [metronome, setMetronome] = useState(null);
 
   const contextValue = {
     players,
@@ -35,10 +37,38 @@ function PresetBank0({ snapMode, isRecording, isPlaying }) {
     recDispatch,
   };
 
+  const constructMet = () => {
+    const _metronome = new Tone.Part(
+      (time) => {
+        players[4].start();
+      },
+      [[0]]
+    );
+    _metronome.start(0);
+    _metronome.loopEnd = "1:0:0";
+    _metronome.loop = true;
+    setMetronome(_metronome);
+  };
+
   const recordModeLogic = () => {
-    console.log('record mode logic running!!');
-    players[4].start();
-  }
+
+    constructMet();
+    Tone.Transport.scheduleOnce(() => {
+      setRecModeState(1);
+      Tone.Transport.position = "0:0:0";
+    }, "1:0:0");
+    Tone.Transport.scheduleRepeat(()=>{
+      console.log(Tone.Transport.position);
+    }, "16n");
+
+    Tone.Transport.start("+0.1", 0);
+  };
+
+  useEffect(()=>{
+    if(recModeState === 1){
+      console.log('put recording logic here');
+    }
+  },[recModeState])
 
   useEffect(() => {
     if (isRecording) {

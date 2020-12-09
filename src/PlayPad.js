@@ -3,7 +3,7 @@ import "./PlayPad.css";
 import { presetBankData } from "./PresetBank0";
 import { playTargetPlayer } from "./helperFunctions";
 
-function PlayPad({ padColor, padIndex }) {
+function PlayPad({ padColor, padIndex, localRecs, setLocalRecs }) {
   const { activeDispatch, currentTrack, isActiveArray, players } = useContext(
     presetBankData
   );

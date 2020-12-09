@@ -2,18 +2,18 @@ import React, { useEffect, useState, useContext } from "react";
 import PlayPad from "./PlayPad";
 import usePlayPadColors from "./usePlayPadColors";
 import { sortPadColorMap } from "./helperFunctions";
-import './PlayPads.css';
+import "./PlayPads.css";
+import { presetBankData } from "./PresetBank0";
 
-
-function PlayPads({currentTrack}) {
-
+function PlayPads() {
+  const { currentTrack, recState, recDispatch } = useContext(presetBankData);
+  //---------------------------------logic for CSS 👇🏾👇🏾👇🏾👇🏾👇🏾-----------------------------------------
   const trackColors = [
     ["#4570E6", "#5DADEC", "#76D7EA"],
     ["#FD3A4A", "#FF8866", "#FF9980"],
     ["#FFFF66", "#BEE64B", "#3AA655"],
     ["#BA55D3", "#9400D3", "#9370DB"],
   ];
-
 
   const [trackMap0, loadingTrackMap0] = usePlayPadColors();
   const [trackMap1, loadingTrackMap1] = usePlayPadColors();
@@ -63,9 +63,7 @@ function PlayPads({currentTrack}) {
         <div className="donut__padRow">
           {padRow.map((colorValue, rowIndex) => (
             <PlayPad
-              padColor={
-                trackColors[currentTrack][colorValue]
-              }
+              padColor={trackColors[currentTrack][colorValue]}
               padIndex={calcPadIndex(rowIndex, colIndex)}
             />
           ))}
@@ -76,8 +74,14 @@ function PlayPads({currentTrack}) {
     }
   }, [colorsSorted, currentTrack]);
 
+  //------------------------------------logic for recording 👇🏾👇🏾👇🏾👇🏾-----------------------------------------
+  const [localRecs, setLocalRecs] = useState(null);
 
-  return <div className="playPads">{targetRender ? targetRender : <h1>loading</h1>}</div>;
+  return (
+    <div className="playPads" localRecs={localRecs} setLocalRecs={setLocalRecs}>
+      {targetRender ? targetRender : <h1>loading</h1>}
+    </div>
+  );
 }
 
 export default PlayPads;
