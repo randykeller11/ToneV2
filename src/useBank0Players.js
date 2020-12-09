@@ -71,6 +71,8 @@ import keysLoop14 from "./Assets/presetBank0/keysLoop14.wav";
 import keysLoop15 from "./Assets/presetBank0/keysLoop15.wav";
 import keysLoop16 from "./Assets/presetBank0/keysLoop16.wav";
 
+import metronome from "./Assets/metronome.wav";
+
 const samples = [
   [
     alcDrumLoop01,
@@ -150,18 +152,22 @@ const useBank0Players = () => {
   const [players, setPlayers] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
   //load the player and audio buffers
 
   const loadToneBuffers = () => {
     const playerArray = [];
-    samples.forEach((track)=>{
+    samples.forEach((track) => {
       let localArray = [];
       track.forEach((element) => {
         localArray.push(new Tone.Player({ url: element }).toDestination());
       });
       playerArray.push(localArray);
     });
+    const _metronome = new Tone.Player({
+      url: metronome,
+    }).toDestination();
+
+    playerArray.push(_metronome);
     Tone.loaded().then(() => {
       setPlayers(playerArray);
       setLoading(false);
@@ -181,11 +187,7 @@ const useBank0Players = () => {
 
 export default useBank0Players;
 
-
-
-
-
-    // const hhPlayer = new Tone.Player({
-    //   url: hh,
-    //   loop: true,
-    // }).toDestination();
+// const hhPlayer = new Tone.Player({
+//   url: hh,
+//   loop: true,
+// }).toDestination();

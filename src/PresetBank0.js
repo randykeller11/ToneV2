@@ -15,9 +15,9 @@ function PresetBank0({ snapMode, isRecording, isPlaying }) {
   );
   const [recState, recDispatch] = useReducer(
     recordingsReducer,
-    initialRecState
+    initialRecState,
   );
-  const [players, loading] = useBank0Players();
+  const [players, Ploading] = useBank0Players();
   const [currentTrack, setCurrentTrack] = useState(0);
   const [presetMode, setPresetMode] = useState(0);
   const [padsRecording, setPadsRecording] = useState(false);
@@ -37,6 +37,7 @@ function PresetBank0({ snapMode, isRecording, isPlaying }) {
 
   const recordModeLogic = () => {
     console.log('record mode logic running!!');
+    players[4].start();
   }
 
   useEffect(() => {
