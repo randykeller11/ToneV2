@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import PlayPads from "./PlayPads";
 import useBank0Players from "./useBank0Players";
 import "./PresetBank.css";
@@ -8,17 +8,24 @@ import { initialRecState, recordingsReducer } from "./recordingsReducer";
 
 export const presetBankData = React.createContext();
 
-function PresetBank0({ snapMode, isRecording }) {
-  const [isActiveArray, activeDispatch] = useReducer(isActiveReducer, initialState);
-  const [recState, recDispatch] = useReducer(recordingsReducer, initialRecState);
+function PresetBank0({ snapMode, isRecording, isPlaying }) {
+  const [isActiveArray, activeDispatch] = useReducer(
+    isActiveReducer,
+    initialState
+  );
+  const [recState, recDispatch] = useReducer(
+    recordingsReducer,
+    initialRecState
+  );
   const [players, loading] = useBank0Players();
   const [currentTrack, setCurrentTrack] = useState(0);
   const [presetMode, setPresetMode] = useState(0);
+  const [padsRecording, setPadsRecording] = useState(false);
 
   const contextValue = {
     players,
     snapMode,
-    isRecording,
+    padsRecording,
     setCurrentTrack,
     currentTrack,
     activeDispatch,
@@ -26,6 +33,16 @@ function PresetBank0({ snapMode, isRecording }) {
     recState,
     recDispatch,
   };
+
+  const recordModeLogic = () => {
+    console.log('record mode logic running!!');
+  }
+
+  useEffect(() => {
+    if (isRecording) {
+      recordModeLogic();
+    }
+  }, [isRecording]);
 
   if (presetMode === 0) {
     return (
