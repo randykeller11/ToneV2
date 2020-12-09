@@ -6,6 +6,8 @@ export const quantizeTransportPosition = (transportValue) => {
   return quantizedPosition;
 };
 
+
+//function to sort pad colors for css
 export const sortPadColorMap = (_trackMap) => {
   const sortedPads = [];
   const localPads = [..._trackMap];
@@ -21,7 +23,7 @@ export const sortPadColorMap = (_trackMap) => {
   return sortedPads;
 };
 
-//contructors for active arrays
+//contructors for isActiveReducer
 
 export const isActiveConstructor = () => {
   const trackConstructor = () => {
@@ -43,4 +45,57 @@ export const isActiveConstructor = () => {
     });
   }
   return _isActiveArray;
+};
+
+//edit value function for isActive reducer
+
+export const editValue = (trackIndex, padIndex, isActiveArray, newValue) => {
+  let localTrack = isActiveArray.find(
+    (track) => track.trackIndex === trackIndex
+  );
+  let newPadState = localTrack.activeArray.map((pad) => {
+    if (pad.key === padIndex) {
+      return { ...pad, isActive: newValue };
+    } else {
+      return pad;
+    }
+  });
+  return newPadState;
+};
+
+
+
+
+
+export const playTargetPlayer = (player) => {
+  if (player.state === "started") {
+    player.stop();
+  }
+  player.start();
+};
+
+
+//functions for recording reducer
+
+export const targetRecsConstructor = () => {
+  let _targetRecsArray = [];
+  for (var i = 0; i < 4; i++) {
+    _targetRecsArray.push({
+      trackIndex: i,
+      targetRecIndex: undefined,
+      trackRecs: 0,
+    });
+  }
+  return _targetRecsArray;
+};
+
+export const activeRecsConstructor = () => {
+  let _activeRecsArray = [];
+  for (var i = 0; i < 4; i++) {
+    _activeRecsArray.push({
+      trackIndex: i,
+      part: undefined,
+    });
+  }
+  return _activeRecsArray;
 };

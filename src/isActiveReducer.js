@@ -1,4 +1,4 @@
-import { isActiveConstructor } from "./helperFunctions";
+import { isActiveConstructor, editValue } from "./helperFunctions";
 
 export const initialState = isActiveConstructor();
 
@@ -7,19 +7,6 @@ const ACTIONS = {
   DEACTIVATE: "deactivate",
 };
 
-const editValue = (trackIndex, padIndex, isActiveArray, newValue) => {
-  let localTrack = isActiveArray.find(
-    (track) => track.trackIndex === trackIndex
-  );
-  let newPadState = localTrack.activeArray.map((pad) => {
-    if (pad.key === padIndex) {
-      return { ...pad, isActive: newValue };
-    } else {
-      return pad;
-    }
-  });
-  return newPadState;
-};
 
 export const isActiveReducer = (isActiveArray, action) => {
   switch (action.type) {

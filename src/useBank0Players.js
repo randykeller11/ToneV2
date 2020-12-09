@@ -70,7 +70,6 @@ import keysLoop13 from "./Assets/presetBank0/keysLoop13.wav";
 import keysLoop14 from "./Assets/presetBank0/keysLoop14.wav";
 import keysLoop15 from "./Assets/presetBank0/keysLoop15.wav";
 import keysLoop16 from "./Assets/presetBank0/keysLoop16.wav";
-import { Sampler } from "tone";
 
 const samples = [
   [
@@ -151,16 +150,8 @@ const useBank0Players = () => {
   const [players, setPlayers] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const localPlayers = [];
 
   //load the player and audio buffers
-
-  const loadSingleTrack = (trackBuffers) => {
-    
-    
-
-
-  }
 
   const loadToneBuffers = () => {
     const playerArray = [];

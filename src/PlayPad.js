@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import "./PlayPad.css";
 import { presetBankData } from "./PresetBank0";
+import { playTargetPlayer } from "./helperFunctions";
 
 function PlayPad({ padColor, padIndex }) {
-  const { dispatch, currentTrack, isActiveArray, players } = useContext(
+  const { activeDispatch, currentTrack, isActiveArray, players } = useContext(
     presetBankData
   );
 
@@ -31,24 +32,17 @@ function PlayPad({ padColor, padIndex }) {
     (pad) => pad.key === padIndex
   );
 
-  const playTargetPlayer = (player) => {
-    if (player.state === "started") {
-      player.stop();
-    }
-    player.start();
-  };
-
   useEffect(() => {
     setisActive(activePadTarget.isActive);
   }, [activePadTarget]);
 
   const downHandler = () => {
-    dispatch({ type: "activate", payload: padLocation });
+    activeDispatch({ type: "activate", payload: padLocation });
     playTargetPlayer(players[currentTrack][padIndex]);
   };
 
   const upHandler = () => {
-    dispatch({ type: "deactivate", payload: padLocation });
+    activeDispatch({ type: "deactivate", payload: padLocation });
   };
 
   return (

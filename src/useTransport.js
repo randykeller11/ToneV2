@@ -3,7 +3,7 @@ import * as Tone from 'tone';
 
 const useTransport = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [bpm, setBpm] = useState(72);
+  const [bpm, setBpm] = useState(75);
 
   const handleBpmChange = (e) => {
     setBpm(e.target.value);
