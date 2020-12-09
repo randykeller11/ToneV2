@@ -65,6 +65,8 @@ function PlayPads() {
             <PlayPad
               padColor={trackColors[currentTrack][colorValue]}
               padIndex={calcPadIndex(rowIndex, colIndex)}
+              localRecs={localRecs}
+              setLocalRecs={setLocalRecs}
             />
           ))}
         </div>
@@ -75,10 +77,10 @@ function PlayPads() {
   }, [colorsSorted, currentTrack]);
 
   //------------------------------------logic for recording 👇🏾👇🏾👇🏾👇🏾-----------------------------------------
-  const [localRecs, setLocalRecs] = useState(null);
+  const [localRecs, setLocalRecs] = useState([]);
 
   return (
-    <div className="playPads" localRecs={localRecs} setLocalRecs={setLocalRecs}>
+    <div className="playPads">
       {targetRender ? targetRender : <h1>loading</h1>}
     </div>
   );

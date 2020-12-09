@@ -28,7 +28,6 @@ function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
   const contextValue = {
     players,
     snapMode,
-    padsRecMode,
     setCurrentTrack,
     currentTrack,
     activeDispatch,
@@ -36,6 +35,7 @@ function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
     recState,
     recDispatch,
     setPadsRecMode,
+    padsRecMode,
   };
 
   const constructMet = () => {
