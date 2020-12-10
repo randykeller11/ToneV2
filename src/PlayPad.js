@@ -46,17 +46,7 @@ function PlayPad({ padIndex, padColor, localRecs, setLocalRecs }) {
 
   const transportTime = Tone.Transport.position;
 
-  //   // if (_currentLocalRecs.find((pad) => pad.padIndex === padIndex)) {
-  //   //   console.log("i know theres alread a value");
-  //   // }
-
-  const [currentLocalRecs, setCurrentLocalRecs] = useState(null);
-
-  useEffect(() => {
-    console.log("useEffectReader in single comp", localRecs);
-  }, [localRecs]);
-
-  const downHandler = () => {
+  const localRecordLogic = () => {
     if (isRecording && snapMode) {
       const newArray = [
         ...localRecs,
@@ -68,16 +58,34 @@ function PlayPad({ padIndex, padColor, localRecs, setLocalRecs }) {
       setLocalRecs(newArray);
     }
     if (isRecording && !snapMode) {
-      console.log("this function is running like it should", localRecs);
-      const newArray = [
-        ...localRecs,
-        {
-          padIndex: padIndex,
-          tStamps: [transportTime],
-        },
-      ];
-      setLocalRecs(newArray);
+      if (localRecs.find((pad) => pad.padIndex === padIndex)) {
+        const newArray = [...localRecs];
+        const updatedArray = newArray.map((pad) => {
+          if (pad.padIndex === padIndex) {
+            let updatedPad = {
+              ...pad,
+              tStamps: [...pad.tStamps, transportTime],
+            };
+            return updatedPad;
+          }
+          return pad;
+        });
+        setLocalRecs(updatedArray);
+      } else {
+        const newArray = [
+          ...localRecs,
+          {
+            padIndex: padIndex,
+            tStamps: [transportTime],
+          },
+        ];
+        setLocalRecs(newArray);
+      }
     }
+  };
+
+  const downHandler = () => {
+    localRecordLogic();
 
     activeDispatch({ type: "activate", payload: padLocation });
     playTargetPlayer(players[currentTrack][padIndex]);
