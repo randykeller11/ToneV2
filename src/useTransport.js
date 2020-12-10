@@ -23,7 +23,7 @@ const useTransport = () => {
           Tone.Transport.scheduleRepeat(()=>{
       console.log(Tone.Transport.position);
     }, "16n");
-      Tone.Transport.start("+0.1","1:0:0");
+      Tone.Transport.start("+0.1","0:0:0");
     } else {
       setIsPlaying(false);
       Tone.Transport.stop();

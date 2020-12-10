@@ -16,7 +16,8 @@ export const recordingsReducer = (recState, action) => {
   switch (action.type) {
     case ACTIONS.ADD:
       {
-        console.log(action.payload.newRec);
+        // console.log(action.payload.newRec);
+        return {recsBank: [...recState.recsBank, action.payload.newRec]};
         // recState.recsBank.push(action.payload.newRec);
         // recState.targetRecs.map((track) => {
         //   if (track.trackIndex === action.payload.trackIndex) {

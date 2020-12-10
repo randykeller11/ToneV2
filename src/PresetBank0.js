@@ -24,6 +24,7 @@ function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
   const [padsRecMode, setPadsRecMode] = useState(0);
   const [recModeState, setRecModeState] = useState(0);
   const [metronome, setMetronome] = useState(null);
+  const [activeRecs, setActiveRecs] = useState([]);
 
   const contextValue = {
     players,
@@ -101,6 +102,33 @@ function PresetBank0({ snapMode, isRecording, isPlaying, clickMode }) {
       recordModeLogic();
     }
   }, [isRecording]);
+
+
+  //useEffect to update active recordings
+
+  useEffect(()=>{
+    if(recState.recsBank.length > 0){
+      let localArray = [...activeRecs]
+      // console.log(recState.recsBank[0]);
+      recState.recsBank[0].recs.forEach(pad => {
+        localArray.push(
+          new Tone.Part(
+            (time) => {
+              players[recState.recsBank[0].track][pad.padIndex].start();
+            },
+            [pad.tStamps]
+          )
+        );
+      });
+      localArray.forEach(part => {
+        part.start(0);
+        part.loopEnd = "4:0:0";
+        part.loop = true;
+      })
+      setActiveRecs(localArray);
+    }
+
+  },[recState])
 
   if (presetMode === 0) {
     return (

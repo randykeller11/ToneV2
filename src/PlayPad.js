@@ -48,14 +48,29 @@ function PlayPad({ padIndex, padColor, localRecs, setLocalRecs }) {
 
   const localRecordLogic = () => {
     if (isRecording && snapMode) {
-      const newArray = [
-        ...localRecs,
-        {
-          padIndex: padIndex,
-          tStamps: [quantizeTransportPosition(transportTime)],
-        },
-      ];
-      setLocalRecs(newArray);
+      if (localRecs.find((pad) => pad.padIndex === padIndex)) {
+        const newArray = [...localRecs];
+        const updatedArray = newArray.map((pad) => {
+          if (pad.padIndex === padIndex) {
+            let updatedPad = {
+              ...pad,
+              tStamps: [...pad.tStamps, quantizeTransportPosition(transportTime)],
+            };
+            return updatedPad;
+          }
+          return pad;
+        });
+        setLocalRecs(updatedArray);
+      } else {
+        const newArray = [
+          ...localRecs,
+          {
+            padIndex: padIndex,
+            tStamps: [transportTime],
+          },
+        ];
+        setLocalRecs(newArray);
+      }
     }
     if (isRecording && !snapMode) {
       if (localRecs.find((pad) => pad.padIndex === padIndex)) {
