@@ -6,7 +6,7 @@ import "./PlayPads.css";
 import { presetBankData } from "./PresetBank0";
 
 function PlayPads() {
-  const { currentTrack, recState, recDispatch } = useContext(presetBankData);
+  const { currentTrack, recState, recDispatch, padsRecMode, setPadsRecMode } = useContext(presetBankData);
   //---------------------------------logic for CSS 👇🏾👇🏾👇🏾👇🏾👇🏾-----------------------------------------
   const trackColors = [
     ["#4570E6", "#5DADEC", "#76D7EA"],
@@ -78,6 +78,20 @@ function PlayPads() {
       setTargetRender(localTarget);
     }
   }, [colorsSorted, currentTrack, localRecs]);
+
+
+  useEffect(()=>{
+    const recording = {newRec: {
+      track: currentTrack,
+      recs: localRecs,}
+    }
+
+    if(padsRecMode === 2){
+      console.log('time to run my clean up function!');
+      recDispatch({type: 'add', payload: recording});
+      setLocalRecs([]);
+    }
+  },[padsRecMode]);
 
   return (
     <div className="playPads">

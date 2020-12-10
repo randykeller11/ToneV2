@@ -82,8 +82,8 @@ export const targetRecsConstructor = () => {
   for (var i = 0; i < 4; i++) {
     _targetRecsArray.push({
       trackIndex: i,
-      targetRecIndex: undefined,
-      trackRecs: 0,
+      // targetRecIndex: undefined,
+      // trackRecs: 0,
     });
   }
   return _targetRecsArray;

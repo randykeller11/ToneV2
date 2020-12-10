@@ -4,7 +4,7 @@ import {
 } from "./helperFunctions";
 
 export const initialRecState = {
-  targetRecs: targetRecsConstructor(),
+  // targetRecs: targetRecsConstructor(),
   recsBank: [],
 };
 
@@ -16,18 +16,18 @@ export const recordingsReducer = (recState, action) => {
   switch (action.type) {
     case ACTIONS.ADD:
       {
-        recState.recsBank.push(action.payload.newRec);
-        recState.targetRecs.map((track) => {
-          if (track.trackIndex === action.payload.trackIndex) {
-            return {
-              ...track,
-              targetRecIndex: action.payload.recIndex,
-              trackRecs: (track.trackRecs + 1),
-            };
-          } else {
-            return track;
-          }
-        });
+        console.log(action.payload.newRec);
+        // recState.recsBank.push(action.payload.newRec);
+        // recState.targetRecs.map((track) => {
+        //   if (track.trackIndex === action.payload.trackIndex) {
+        //     return {
+        //       ...track,
+        //       targetRecIndex: action.payload.recIndex,
+        //     };
+        //   } else {
+        //     return track;
+        //   }
+        // });
       }
       break;
   }
