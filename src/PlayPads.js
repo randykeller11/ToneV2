@@ -57,6 +57,16 @@ function PlayPads() {
     return row * 4 + col;
   };
 
+
+
+  //------------------------------------logic for recording 👇🏾👇🏾👇🏾👇🏾-----------------------------------------
+  const [localRecs, setLocalRecs] = useState([]);
+
+  useEffect(()=>{
+    console.log('useEffectReader in pads comp', localRecs);
+  },[localRecs])
+  
+
   useEffect(() => {
     if (colorsSorted) {
       const localTarget = colorMap[currentTrack].map((padRow, colIndex) => (
@@ -75,9 +85,6 @@ function PlayPads() {
       setTargetRender(localTarget);
     }
   }, [colorsSorted, currentTrack]);
-
-  //------------------------------------logic for recording 👇🏾👇🏾👇🏾👇🏾-----------------------------------------
-  const [localRecs, setLocalRecs] = useState([]);
 
   return (
     <div className="playPads">

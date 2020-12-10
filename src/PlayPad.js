@@ -4,7 +4,7 @@ import "./PlayPad.css";
 import { presetBankData } from "./PresetBank0";
 import { playTargetPlayer, quantizeTransportPosition } from "./helperFunctions";
 
-function PlayPad({ padColor, padIndex, localRecs, setLocalRecs }) {
+function PlayPad({ padIndex, padColor, localRecs, setLocalRecs }) {
   const {
     activeDispatch,
     currentTrack,
@@ -46,29 +46,37 @@ function PlayPad({ padColor, padIndex, localRecs, setLocalRecs }) {
 
   const transportTime = Tone.Transport.position;
 
-  const recModeLogic = (_currentLocalRecs, _time) => {
-    // if (_currentLocalRecs.find((pad) => pad.padIndex === padIndex)) {
-    //   console.log("i know theres alread a value");
-    // } else {
-    _currentLocalRecs.push({
-      padIndex: padIndex,
-      tStamps: [_time],
-    });
-    // console.log(_currentLocalRecs);
-    return _currentLocalRecs;
-  };
+  //   // if (_currentLocalRecs.find((pad) => pad.padIndex === padIndex)) {
+  //   //   console.log("i know theres alread a value");
+  //   // }
+
+  const [currentLocalRecs, setCurrentLocalRecs] = useState(null);
+
+  useEffect(() => {
+    console.log("useEffectReader in single comp", localRecs);
+  }, [localRecs]);
+
   const downHandler = () => {
-    const currentLocalRecs = [...localRecs];
-    console.log(currentLocalRecs);
     if (isRecording && snapMode) {
-      setLocalRecs(
-        recModeLogic(currentLocalRecs, quantizeTransportPosition(transportTime))
-      );
-      // console.log(newArray);
+      const newArray = [
+        ...localRecs,
+        {
+          padIndex: padIndex,
+          tStamps: [quantizeTransportPosition(transportTime)],
+        },
+      ];
+      setLocalRecs(newArray);
     }
     if (isRecording && !snapMode) {
-      setLocalRecs(recModeLogic(currentLocalRecs, transportTime));
-      // console.log(newArray);
+      console.log("this function is running like it should", localRecs);
+      const newArray = [
+        ...localRecs,
+        {
+          padIndex: padIndex,
+          tStamps: [transportTime],
+        },
+      ];
+      setLocalRecs(newArray);
     }
 
     activeDispatch({ type: "activate", payload: padLocation });
