@@ -1,8 +1,8 @@
 //convert transport position into nearest non decimal value
 export const quantizeTransportPosition = (transportValue) => {
   const position = transportValue.split(":");
-  const lastDigit = position[2].split(".");
-  const quantizedPosition = [position[0], position[1], lastDigit[0]].join(":");
+  const lastDigit = Math.round(position[2]);
+  const quantizedPosition = [position[0], position[1], lastDigit].join(":");
   return quantizedPosition;
 };
 
@@ -66,13 +66,14 @@ export const editValue = (trackIndex, padIndex, isActiveArray, newValue) => {
 
 
 
-
+//function for play button
 export const playTargetPlayer = (player) => {
   if (player.state === "started") {
     player.stop();
   }
   player.start();
 };
+
 
 
 //functions for recording reducer

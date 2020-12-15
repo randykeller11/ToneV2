@@ -9,7 +9,12 @@ import PresetBank0 from "./PresetBank0";
 const Track0 = React.lazy(() => import("./PresetBank0"));
 
 function GameMode() {
+  //which presetBank the app is using and what mode it is in
   const [presetBank, setPresetBank] = useState(false);
+  const [presetMode, setPresetMode] = useState(0);
+
+
+  //transport state variables
   const [isRecording, toggleRecord] = useToggle();
   const [clickMode, toggleClickMode] = useToggle();
   const [snapMode, toggleSnapMode] = useToggle();
@@ -108,7 +113,7 @@ function GameMode() {
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-          <PresetBank0 isRecording={isRecording} snapMode={snapMode} isPlaying={isPlaying} clickMode={clickMode}/>
+          <PresetBank0 isRecording={isRecording} snapMode={snapMode} isPlaying={isPlaying} clickMode={clickMode} presetMode={presetMode}/>
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}

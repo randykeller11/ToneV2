@@ -2,12 +2,15 @@ import { isActiveConstructor, editValue } from "./helperFunctions";
 
 export const initialState = isActiveConstructor();
 
+
+//object to translate reducer actions
 const ACTIONS = {
   ACTIVATE: "activate",
   DEACTIVATE: "deactivate",
 };
 
 
+//reducer for isActive array
 export const isActiveReducer = (isActiveArray, action) => {
   switch (action.type) {
     case ACTIONS.ACTIVATE:
