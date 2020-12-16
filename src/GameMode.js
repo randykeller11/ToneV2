@@ -33,7 +33,7 @@ function GameMode() {
         className="togglePreset"
         style={{ display: "flex", justifyContent: "center" }}
       >
-        <h1> 🍩 Donut 5000</h1>
+        <h3> 🍩 Donut 5000</h3>
       </div>
       {/*-------------------Transport Buttons----------------------------*/}
 

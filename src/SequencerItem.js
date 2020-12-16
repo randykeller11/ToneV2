@@ -20,6 +20,11 @@ function SequencerItem({ rowIndex, itemIndex }) {
     opacity: "62%",
   }
 
+  const activeStyle = {
+    backgroundColor: togglerColors[currentTrack],
+    opacity: "100%",
+  }
+
   useEffect(() => {
     setTargetRender(
       <div
