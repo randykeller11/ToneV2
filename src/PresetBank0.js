@@ -157,7 +157,7 @@ function PresetBank0({
 
 
   //return statement currently only handles play mode
-  if (presetMode === 0) {
+  if (presetMode === 1) {
     return (
       <div className="presetBank">
         <presetBankData.Provider value={contextValue}>

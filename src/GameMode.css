@@ -61,7 +61,11 @@
     margin-top: 5vh;
 }
 
-
+.toggleButtons{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+}
 
 @media (max-width: 850px) {
 

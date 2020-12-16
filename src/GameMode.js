@@ -11,8 +11,7 @@ const Track0 = React.lazy(() => import("./PresetBank0"));
 function GameMode() {
   //which presetBank the app is using and what mode it is in
   const [presetBank, setPresetBank] = useState(false);
-  const [presetMode, setPresetMode] = useState(0);
-
+  const [presetMode, setPresetMode] = useState(1);
 
   //transport state variables
   const [isRecording, toggleRecord] = useToggle();
@@ -28,12 +27,11 @@ function GameMode() {
     quantizeTransportPosition,
   ] = useTransport();
 
-  
-
   return (
     <div className="mainGame">
-      <div className="togglePreset"
-        style={{display: "flex", justifyContent: "center"}}
+      <div
+        className="togglePreset"
+        style={{ display: "flex", justifyContent: "center" }}
       >
         <h1> 🍩 Donut 5000</h1>
       </div>
@@ -113,16 +111,74 @@ function GameMode() {
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-          <PresetBank0 isRecording={isRecording} snapMode={snapMode} isPlaying={isPlaying} clickMode={clickMode} presetMode={presetMode}/>
+        <PresetBank0
+          isRecording={isRecording}
+          snapMode={snapMode}
+          isPlaying={isPlaying}
+          clickMode={clickMode}
+          presetMode={presetMode}
+        />
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}
 
       <div className="toggleMode">
-        <h5> Mode toggle buttons</h5>
+        <div className="toggleButtons">
+          <div className="transportButtons__buttonBox">
+            <div
+              className={
+                presetMode === 0
+                  ? "transportButtons__buttonBox__circleActive"
+                  : "transportButtons__buttonBox__circleInactive"
+              }
+            >
+              <h5>🔊</h5>
+            </div>
+            <h5 id="buttonBox__description">Volume</h5>
+          </div>
+
+          <div className="transportButtons__buttonBox">
+            <div
+            onClick={()=>setPresetMode(1)}
+              className={
+                presetMode === 1
+                  ? "transportButtons__buttonBox__circleActive"
+                  : "transportButtons__buttonBox__circleInactive"
+              }
+            >
+              <h5>🔊</h5>
+            </div>
+            <h5 id="buttonBox__description">PlayPad</h5>
+          </div>
+
+          <div className="transportButtons__buttonBox">
+            <div
+              className={
+                presetMode === 2
+                  ? "transportButtons__buttonBox__circleActive"
+                  : "transportButtons__buttonBox__circleInactive"
+              }
+            >
+              <h5>🔊</h5>
+            </div>
+            <h5 id="buttonBox__description">LoopPad</h5>
+          </div>
+
+          <div className="transportButtons__buttonBox">
+            <div
+              onClick={()=>setPresetMode(3)}
+              className={
+                presetMode === 3
+                  ? "transportButtons__buttonBox__circleActive"
+                  : "transportButtons__buttonBox__circleInactive"
+              }
+            >
+              <h5>🔊</h5>
+            </div>
+            <h5 id="buttonBox__description">Sequencer</h5>
+          </div>
+        </div>
       </div>
-
-
     </div>
   );
 }
