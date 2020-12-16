@@ -1,5 +1,5 @@
 .sequencer{
-    border: 2px solid darkgray;
+    /* border: 2px solid darkgray; */
     display: flex;
     justify-content: space-between;
     padding-left: 10px;
@@ -24,4 +24,8 @@
 }
 .sequencer__rowBox__index{
     padding-right: 8px;
+}
+
+.sequencer__arrow{
+    padding-top: 30vh;
 }

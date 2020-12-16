@@ -1,6 +1,6 @@
 import React, { Suspense, useState, useEffect } from "react";
 import useTransport from "./useTransport";
-import { LinearProgress } from "@material-ui/core/";
+import { LinearProgress, Stepper, Step } from "@material-ui/core/";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
 import useToggle from "./useToggle";
 import "./GameMode.css";
@@ -26,6 +26,8 @@ function GameMode() {
     handleBpmChange,
     quantizeTransportPosition,
   ] = useTransport();
+
+  const [seqModeBar, setSeqModeBar] = useState(0);
 
   return (
     <div className="mainGame">
@@ -104,9 +106,15 @@ function GameMode() {
       </div>
 
       {/*--------------------progress bar----------------------------*/}
-      <div className="progressBar">
-        <LinearProgress variant="determinate" value={25} />
-      </div>
+      {presetMode === !3 ? (
+        <div className="progressBar">
+          <LinearProgress variant="determinate" value={25} />
+        </div>
+      ) : (
+        <div className="placeHolder__seqProgress">
+          <h3>current bar: {seqModeBar}</h3>
+        </div>
+      )}
 
       {/*---------------------lazy load PresetBank component-------------*/}
 
@@ -117,6 +125,8 @@ function GameMode() {
           isPlaying={isPlaying}
           clickMode={clickMode}
           presetMode={presetMode}
+          setSeqModeBar={setSeqModeBar}
+          seqModeBar={seqModeBar}
         />
       </Suspense>
 
@@ -139,7 +149,7 @@ function GameMode() {
 
           <div className="transportButtons__buttonBox">
             <div
-            onClick={()=>setPresetMode(1)}
+              onClick={() => setPresetMode(1)}
               className={
                 presetMode === 1
                   ? "transportButtons__buttonBox__circleActive"
@@ -166,7 +176,7 @@ function GameMode() {
 
           <div className="transportButtons__buttonBox">
             <div
-              onClick={()=>setPresetMode(3)}
+              onClick={() => setPresetMode(3)}
               className={
                 presetMode === 3
                   ? "transportButtons__buttonBox__circleActive"

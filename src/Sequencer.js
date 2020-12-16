@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Sequencer.css";
 import SequencerRow from "./SequencerRow";
+import {presetBankData} from './PresetBank0';
 
 function Sequencer() {
+
   const gridBuilder = () => {
     let localArray = [];
     for (var i = 0; i < 16; i++) {
@@ -17,9 +19,9 @@ function Sequencer() {
 
   return (
     <div className="sequencer">
-      <h1>⬅️</h1>
+      <h1 className="sequencer__arrow">⬅️</h1>
       <div className="sequencer__grid">{gridBuilder()}</div>
-      <h1>➡️</h1>
+      <h1 className="sequencer__arrow">➡️</h1>
     </div>
   );
 }

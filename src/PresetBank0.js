@@ -17,6 +17,8 @@ function PresetBank0({
   isPlaying,
   clickMode,
   presetMode,
+  setSeqModeBar,
+  seqModeBar,
 }) {
   //reducer for active pad animations
   const [isActiveArray, activeDispatch] = useReducer(
@@ -52,6 +54,8 @@ function PresetBank0({
     recDispatch,
     setPadsRecMode,
     padsRecMode,
+    seqModeBar,
+    setSeqModeBar,
   };
 
   //metronome constructor function creates a tone.part looped at 1 bar

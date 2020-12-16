@@ -55,6 +55,11 @@
     flex-flow: column;
 } */
 
+.placeHolder__seqProgress{
+    display: flex;
+    justify-content: center;
+}
+
 .toggleMode{
     border-top: 3.5px solid rgba(94, 59, 190, 0.295);
     padding-bottom: 4vh;
