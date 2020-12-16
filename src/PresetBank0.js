@@ -6,6 +6,7 @@ import "./PresetBank.css";
 import TrackToggle from "./TrackToggle";
 import { initialState, isActiveReducer } from "./isActiveReducer";
 import { initialRecState, recordingsReducer } from "./recordingsReducer";
+import Sequencer from "./Sequencer";
 
 //context function for data layer
 export const presetBankData = React.createContext();
@@ -83,7 +84,6 @@ function PresetBank0({
     Tone.Transport.start("+0.1", 0);
   };
 
-
   //first use effect for recording logic
 
   useEffect(() => {
@@ -101,8 +101,7 @@ function PresetBank0({
     }
   }, [recModeState]);
 
-
-//use effect for timestamp cleanup
+  //use effect for timestamp cleanup
   useEffect(() => {
     if (recModeState === 2) {
       //start local pads cleanup functionality
@@ -126,9 +125,8 @@ function PresetBank0({
     }
   }, [isRecording]);
 
-
   //useEffect to update active recordings
-  //currently scaled down for only value. 
+  //currently scaled down for only value.
   //eventually needs to handle multiple objects in rec state array
 
   useEffect(() => {
@@ -155,7 +153,6 @@ function PresetBank0({
     }
   }, [recState]);
 
-
   //return statement currently only handles play mode
   if (presetMode === 1) {
     return (
@@ -165,6 +162,13 @@ function PresetBank0({
           <TrackToggle />
         </presetBankData.Provider>
       </div>
+    );
+  } else if (presetMode === 3) {
+    return (
+      <presetBankData.Provider value={contextValue}>
+        <Sequencer />
+        <TrackToggle />
+      </presetBankData.Provider>
     );
   } else return <h1>wait on it</h1>;
 }

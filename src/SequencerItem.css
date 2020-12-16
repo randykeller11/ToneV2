@@ -1,0 +1,5 @@
+.sequencer__item{
+    width: 2em;
+    height: 2em;
+    border: 2px solid darkgray;
+}

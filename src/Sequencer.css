@@ -1,0 +1,27 @@
+.sequencer{
+    border: 2px solid darkgray;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+}
+
+.sequencer__grid{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+.sequencer__gridRow{
+    border: 2px solid green;
+    width: 75vw;
+}
+
+.sequencer__rowBox{
+    display: flex;
+    flex-flow: row;
+}
+.sequencer__rowBox__index{
+    padding-right: 8px;
+}

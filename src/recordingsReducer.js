@@ -4,7 +4,7 @@ import {
 } from "./helperFunctions";
 
 export const initialRecState = {
-  // targetRecs: targetRecsConstructor(),
+  targetRecs: targetRecsConstructor(),
   recsBank: [],
 };
 

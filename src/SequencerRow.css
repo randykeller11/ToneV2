@@ -1,0 +1,5 @@
+.sequencer__row{
+    display: flex;
+    flex-flow: row;
+    border: 2px solid darkgray;
+}
