@@ -1,7 +1,7 @@
 import {
   activeRecsConstructor,
   targetRecsConstructor,
-} from "./helperFunctions";
+} from "../helperFunctions";
 
 export const initialRecState = {
   targetRecs: targetRecsConstructor(),

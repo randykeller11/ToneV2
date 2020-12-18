@@ -1,25 +1,30 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useContext } from "react";
 import * as Tone from "tone";
-import PlayPads from "./PlayPads";
-import useBank0Players from "./useBank0Players";
-import "./PresetBank.css";
+import PlayPads from "./playpadMode/PlayPads";
+import "./PresetDesign.css";
 import TrackToggle from "./TrackToggle";
-import { initialState, isActiveReducer } from "./isActiveReducer";
-import { initialRecState, recordingsReducer } from "./recordingsReducer";
-import Sequencer from "./Sequencer";
+import { initialState, isActiveReducer } from "../reducers/isActiveReducer";
+import { initialRecState, recordingsReducer } from "../reducers/recordingsReducer";
+import Sequencer from "./sequenceMode/Sequencer";
+import {gameModeData} from './GameMode';
 
 //context function for data layer
 export const presetBankData = React.createContext();
 
-function PresetBank0({
-  snapMode,
-  isRecording,
-  isPlaying,
-  clickMode,
-  presetMode,
-  setSeqModeBar,
-  seqModeBar,
+function PresetDesign({
+  players,
 }) {
+
+  const {
+    snapMode,
+    isRecording,
+    isPlaying,
+    clickMode,
+    presetMode,
+    setSeqModeBar,
+    seqModeBar,
+  } = useContext(gameModeData);
+
   //reducer for active pad animations
   const [isActiveArray, activeDispatch] = useReducer(
     isActiveReducer,
@@ -32,8 +37,7 @@ function PresetBank0({
     initialRecState
   );
 
-  //custom hook for loading bank specific players
-  const [players, loading] = useBank0Players();
+
 
   //state variables for presetBank functionality
   const [currentTrack, setCurrentTrack] = useState(0);
@@ -177,4 +181,4 @@ function PresetBank0({
   } else return <h1>wait on it</h1>;
 }
 
-export default PresetBank0;
+export default PresetDesign;

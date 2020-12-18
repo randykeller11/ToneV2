@@ -1,4 +1,4 @@
-import { isActiveConstructor, editValue } from "./helperFunctions";
+import { isActiveConstructor, editValue } from "../helperFunctions";
 
 export const initialState = isActiveConstructor();
 

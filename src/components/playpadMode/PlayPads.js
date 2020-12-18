@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import PlayPad from "./PlayPad";
-import usePlayPadColors from "./usePlayPadColors";
-import { sortPadColorMap } from "./helperFunctions";
+import usePlayPadColors from "../../customHooks/usePlayPadColors";
+import { sortPadColorMap } from "../../helperFunctions";
 import "./PlayPads.css";
-import { presetBankData } from "./PresetBank0";
+import { presetBankData } from "../PresetDesign";
 
 function PlayPads() {
   const { currentTrack, recState, recDispatch, padsRecMode, setPadsRecMode } = useContext(presetBankData);

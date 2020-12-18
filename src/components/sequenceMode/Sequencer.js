@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Sequencer.css";
 import SequencerRow from "./SequencerRow";
-import {presetBankData} from './PresetBank0';
+import {presetBankData} from '../PresetDesign';
 
 function Sequencer() {
 

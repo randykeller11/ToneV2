@@ -1,12 +1,15 @@
 import React, { Suspense, useState, useEffect } from "react";
-import useTransport from "./useTransport";
+import useTransport from "../customHooks/useTransport";
 import { LinearProgress, Stepper, Step } from "@material-ui/core/";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
-import useToggle from "./useToggle";
+import useToggle from "../customHooks/useToggle";
 import "./GameMode.css";
-import PresetBank0 from "./PresetBank0";
+import PresetBank0 from "../presets/PresetBank0";
 
-const Track0 = React.lazy(() => import("./PresetBank0"));
+const Track0 = React.lazy(() => import("../presets/PresetBank0"));
+
+//export the outer context
+export const gameModeData = React.createContext();
 
 function GameMode() {
   //which presetBank the app is using and what mode it is in
@@ -28,6 +31,17 @@ function GameMode() {
   ] = useTransport();
 
   const [seqModeBar, setSeqModeBar] = useState(0);
+
+  //context values
+  const contextValue = {
+    snapMode,
+    isRecording,
+    isPlaying,
+    clickMode,
+    presetMode,
+    setSeqModeBar,
+    seqModeBar,
+  };
 
   return (
     <div className="mainGame">
@@ -106,28 +120,22 @@ function GameMode() {
       </div>
 
       {/*--------------------progress bar----------------------------*/}
-      {presetMode === !3 ? (
-        <div className="progressBar">
-          <LinearProgress variant="determinate" value={25} />
-        </div>
-      ) : (
+      {presetMode != 1 ? (
         <div className="placeHolder__seqProgress">
           <h3>current bar: {seqModeBar}</h3>
+        </div>
+      ) : (
+        <div className="progressBar">
+          <LinearProgress variant="determinate" value={25} />
         </div>
       )}
 
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-        <PresetBank0
-          isRecording={isRecording}
-          snapMode={snapMode}
-          isPlaying={isPlaying}
-          clickMode={clickMode}
-          presetMode={presetMode}
-          setSeqModeBar={setSeqModeBar}
-          seqModeBar={seqModeBar}
-        />
+        <gameModeData.Provider value={contextValue}>
+          <PresetBank0 />
+        </gameModeData.Provider>
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}
