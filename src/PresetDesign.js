@@ -37,8 +37,7 @@ function PresetDesign({
     initialRecState
   );
 
-  //custom hook for loading bank specific players
-  const [players, loading] = useBank0Players();
+
 
   //state variables for presetBank functionality
   const [currentTrack, setCurrentTrack] = useState(0);

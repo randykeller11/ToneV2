@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./SequencerItem.css";
-import { presetBankData } from "./PresetBank0";
+import { presetBankData } from "./PresetDesign";
 
 function SequencerItem({ rowIndex, itemIndex }) {
   const [targetRender, setTargetRender] = useState(null);

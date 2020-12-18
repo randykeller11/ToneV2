@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import * as Tone from "tone";
 import "./PlayPad.css";
-import { presetBankData } from "./PresetBank0";
+import { presetBankData } from "./PresetDesign";
 import { playTargetPlayer, quantizeTransportPosition } from "./helperFunctions";
 
 function PlayPad({ padIndex, padColor, localRecs, setLocalRecs }) {
