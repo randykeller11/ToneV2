@@ -83,8 +83,8 @@ export const targetRecsConstructor = () => {
   for (var i = 0; i < 4; i++) {
     _targetRecsArray.push({
       trackIndex: i,
-      // targetRecIndex: undefined,
-      // trackRecs: 0,
+      targetRecIndex: null,
+      trackRecs: 0,
     });
   }
   return _targetRecsArray;
@@ -95,7 +95,8 @@ export const activeRecsConstructor = () => {
   for (var i = 0; i < 4; i++) {
     _activeRecsArray.push({
       trackIndex: i,
-      part: undefined,
+      recIndex: null,
+      part: null,
     });
   }
   return _activeRecsArray;
