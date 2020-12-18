@@ -4,7 +4,7 @@ import { LinearProgress } from "@material-ui/core/";
 import { dataLayer } from "./App";
 import PlayerPad from "./PlayerPad";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
-import useTransport from "./useTransport";
+import useTransport from "./customHooks/useTransport";
 import useToggle from "./useToggle";
 import * as Tone from 'tone';
 

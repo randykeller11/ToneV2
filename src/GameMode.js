@@ -1,12 +1,15 @@
 import React, { Suspense, useState, useEffect } from "react";
-import useTransport from "./useTransport";
+import useTransport from "./customHooks/useTransport";
 import { LinearProgress, Stepper, Step } from "@material-ui/core/";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
 import useToggle from "./useToggle";
 import "./GameMode.css";
-import PresetDesign from "./PresetDesign";
+import PresetBank0 from "./PresetBank0";
 
-const Track0 = React.lazy(() => import("./PresetDesign"));
+const Track0 = React.lazy(() => import("./PresetBank0"));
+
+//export the outer context
+export const gameModeData = React.createContext();
 
 function GameMode() {
   //which presetBank the app is using and what mode it is in
@@ -28,6 +31,17 @@ function GameMode() {
   ] = useTransport();
 
   const [seqModeBar, setSeqModeBar] = useState(0);
+
+  //context values
+  const contextValue = {
+    snapMode,
+    isRecording,
+    isPlaying,
+    clickMode,
+    presetMode,
+    setSeqModeBar,
+    seqModeBar,
+  };
 
   return (
     <div className="mainGame">
@@ -119,15 +133,9 @@ function GameMode() {
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-        <PresetDesign
-          isRecording={isRecording}
-          snapMode={snapMode}
-          isPlaying={isPlaying}
-          clickMode={clickMode}
-          presetMode={presetMode}
-          setSeqModeBar={setSeqModeBar}
-          seqModeBar={seqModeBar}
-        />
+        <gameModeData.Provider value={contextValue}>
+          <PresetBank0 />
+        </gameModeData.Provider>
       </Suspense>
 
       {/*--------------------Mode Toggle Buttons----------------------------*/}

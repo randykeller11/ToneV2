@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect, useContext } from "react";
 import * as Tone from "tone";
 import PlayPads from "./PlayPads";
 import "./PresetDesign.css";
@@ -6,20 +6,25 @@ import TrackToggle from "./TrackToggle";
 import { initialState, isActiveReducer } from "./isActiveReducer";
 import { initialRecState, recordingsReducer } from "./recordingsReducer";
 import Sequencer from "./Sequencer";
+import {gameModeData} from './GameMode';
 
 //context function for data layer
 export const presetBankData = React.createContext();
 
 function PresetDesign({
-  snapMode,
-  isRecording,
-  isPlaying,
-  clickMode,
-  presetMode,
-  setSeqModeBar,
-  seqModeBar,
   players,
 }) {
+
+  const {
+    snapMode,
+    isRecording,
+    isPlaying,
+    clickMode,
+    presetMode,
+    setSeqModeBar,
+    seqModeBar,
+  } = useContext(gameModeData);
+
   //reducer for active pad animations
   const [isActiveArray, activeDispatch] = useReducer(
     isActiveReducer,
