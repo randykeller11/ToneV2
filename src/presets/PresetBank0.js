@@ -1,6 +1,6 @@
 import React from "react";
 import useBank0Players from "./useBank0Players";
-import PresetDesign from "./PresetDesign";
+import PresetDesign from "../components/PresetDesign";
 function PresetBank0() {
   //custom hook for loading bank specific players
   const [players, loading] = useBank0Players();

@@ -1,11 +1,11 @@
 import React, { useState, useReducer, useEffect, useContext } from "react";
 import * as Tone from "tone";
-import PlayPads from "./PlayPads";
+import PlayPads from "./playpadMode/PlayPads";
 import "./PresetDesign.css";
-import TrackToggle from "./TrackToggle";
+import TrackToggle from "../TrackToggle";
 import { initialState, isActiveReducer } from "./isActiveReducer";
-import { initialRecState, recordingsReducer } from "./recordingsReducer";
-import Sequencer from "./Sequencer";
+import { initialRecState, recordingsReducer } from "../reducers/recordingsReducer";
+import Sequencer from "./sequenceMode/Sequencer";
 import {gameModeData} from './GameMode';
 
 //context function for data layer

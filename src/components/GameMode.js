@@ -1,12 +1,12 @@
 import React, { Suspense, useState, useEffect } from "react";
-import useTransport from "./customHooks/useTransport";
+import useTransport from "../customHooks/useTransport";
 import { LinearProgress, Stepper, Step } from "@material-ui/core/";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
-import useToggle from "./useToggle";
+import useToggle from "../customHooks/useToggle";
 import "./GameMode.css";
-import PresetBank0 from "./PresetBank0";
+import PresetBank0 from "../presets/PresetBank0";
 
-const Track0 = React.lazy(() => import("./PresetBank0"));
+const Track0 = React.lazy(() => import("../presets/PresetBank0"));
 
 //export the outer context
 export const gameModeData = React.createContext();
