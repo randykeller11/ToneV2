@@ -13,7 +13,7 @@ function SequencerItem({ rowIndex, itemIndex }) {
     setPadsRecMode,
   } = useContext(presetBankData);
 
-  const togglerColors = ["#5DADEC", "#FF8866", "#BEE64B", "#9400D3"];
+  const togglerColors = ["#5DADEC", "#FF8866", "#BEE64B", "#9370DB"];
 
   const inactiveStyle = {
     backgroundColor: togglerColors[currentTrack],
