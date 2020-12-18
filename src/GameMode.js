@@ -4,9 +4,9 @@ import { LinearProgress, Stepper, Step } from "@material-ui/core/";
 import { PlayArrow, Mic, Undo, MusicNote, Schedule } from "@material-ui/icons";
 import useToggle from "./useToggle";
 import "./GameMode.css";
-import PresetBank0 from "./PresetBank0";
+import PresetDesign from "./PresetDesign";
 
-const Track0 = React.lazy(() => import("./PresetBank0"));
+const Track0 = React.lazy(() => import("./PresetDesign"));
 
 function GameMode() {
   //which presetBank the app is using and what mode it is in
@@ -106,20 +106,20 @@ function GameMode() {
       </div>
 
       {/*--------------------progress bar----------------------------*/}
-      {presetMode === !3 ? (
-        <div className="progressBar">
-          <LinearProgress variant="determinate" value={25} />
-        </div>
-      ) : (
+      {presetMode != 1 ? (
         <div className="placeHolder__seqProgress">
           <h3>current bar: {seqModeBar}</h3>
+        </div>
+      ) : (
+        <div className="progressBar">
+          <LinearProgress variant="determinate" value={25} />
         </div>
       )}
 
       {/*---------------------lazy load PresetBank component-------------*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-        <PresetBank0
+        <PresetDesign
           isRecording={isRecording}
           snapMode={snapMode}
           isPlaying={isPlaying}
