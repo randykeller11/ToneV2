@@ -23,6 +23,7 @@ function PresetDesign({
     presetMode,
     setSeqModeBar,
     seqModeBar,
+    setPresetMode,
   } = useContext(gameModeData);
 
   //reducer for active pad animations
@@ -116,6 +117,7 @@ function PresetDesign({
       setPadsRecMode(2);
       console.log("put end of recording logic here");
       //restart transport after update
+      setPresetMode(3);
       Tone.Transport.stop();
       Tone.Transport.position = "0:0:0";
       Tone.Transport.start("+.01");

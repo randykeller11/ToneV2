@@ -14,7 +14,7 @@ export const gameModeData = React.createContext();
 function GameMode() {
   //which presetBank the app is using and what mode it is in
   const [presetBank, setPresetBank] = useState(false);
-  const [presetMode, setPresetMode] = useState(3);
+  const [presetMode, setPresetMode] = useState(1);
 
   //transport state variables
   const [isRecording, toggleRecord] = useToggle();
@@ -41,6 +41,7 @@ function GameMode() {
     presetMode,
     setSeqModeBar,
     seqModeBar,
+    setPresetMode,
   };
 
   return (
