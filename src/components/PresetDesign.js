@@ -4,17 +4,17 @@ import PlayPads from "./playpadMode/PlayPads";
 import "./PresetDesign.css";
 import TrackToggle from "./TrackToggle";
 import { initialState, isActiveReducer } from "../reducers/isActiveReducer";
-import { initialRecState, recordingsReducer } from "../reducers/recordingsReducer";
+import {
+  initialRecState,
+  recordingsReducer,
+} from "../reducers/recordingsReducer";
 import Sequencer from "./sequenceMode/Sequencer";
-import {gameModeData} from './GameMode';
+import { gameModeData } from "./GameMode";
 
 //context function for data layer
 export const presetBankData = React.createContext();
 
-function PresetDesign({
-  players,
-}) {
-
+function PresetDesign({ players }) {
   const {
     snapMode,
     isRecording,
@@ -37,8 +37,6 @@ function PresetDesign({
     recordingsReducer,
     initialRecState
   );
-
-
 
   //state variables for presetBank functionality
   const [currentTrack, setCurrentTrack] = useState(0);
@@ -116,8 +114,11 @@ function PresetDesign({
       //start local pads cleanup functionality
       setPadsRecMode(2);
       console.log("put end of recording logic here");
-      //restart transport after update
+      //set presetMode to sequencer mode
       setPresetMode(3);
+
+      //restart transport after update
+
       Tone.Transport.stop();
       Tone.Transport.position = "0:0:0";
       Tone.Transport.start("+.01");
@@ -142,7 +143,7 @@ function PresetDesign({
   useEffect(() => {
     if (recState.recsBank.length > 0) {
       let localArray = [...activeRecs];
-      // console.log(recState.recsBank[0]);
+      console.log(recState.recsBank[0]);
       recState.recsBank[0].recs.forEach((pad) => {
         console.log(pad.padIndex, pad.tStamps);
         localArray.push(
