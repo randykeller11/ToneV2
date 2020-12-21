@@ -113,15 +113,23 @@ function PresetDesign({ players }) {
     if (recModeState === 2) {
       //start local pads cleanup functionality
       setPadsRecMode(2);
-      console.log("put end of recording logic here");
-      //set presetMode to sequencer mode
-      setPresetMode(3);
-
-      //restart transport after update
-
       Tone.Transport.stop();
       Tone.Transport.position = "0:0:0";
       Tone.Transport.start("+.01");
+      // console.log("put end of recording logic here");
+    }
+  }, [recModeState]);
+
+
+  //eventual clean up function
+  useEffect(() => {
+    if (recModeState === 3) {
+      //restart transport after update
+      Tone.Transport.stop();
+      Tone.Transport.position = "0:0:0";
+      Tone.Transport.start("+.01");
+      // //set presetMode to sequencer mode
+      setPresetMode(3);
     }
   }, [recModeState]);
 
@@ -143,7 +151,7 @@ function PresetDesign({ players }) {
   useEffect(() => {
     if (recState.recsBank.length > 0) {
       let localArray = [...activeRecs];
-      console.log(recState.recsBank[0]);
+      // console.log(recState.recsBank[0]);
       recState.recsBank[0].recs.forEach((pad) => {
         console.log(pad.padIndex, pad.tStamps);
         localArray.push(

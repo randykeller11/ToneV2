@@ -95,8 +95,7 @@ export const activeRecsConstructor = () => {
   for (var i = 0; i < 4; i++) {
     _activeRecsArray.push({
       trackIndex: i,
-      recIndex: null,
-      part: null,
+      recordings: [],
     });
   }
   return _activeRecsArray;

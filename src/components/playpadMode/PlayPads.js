@@ -6,7 +6,13 @@ import "./PlayPads.css";
 import { presetBankData } from "../PresetDesign";
 
 function PlayPads() {
-  const { currentTrack, recState, recDispatch, padsRecMode, setPadsRecMode } = useContext(presetBankData);
+  const {
+    currentTrack,
+    recState,
+    recDispatch,
+    padsRecMode,
+    setPadsRecMode,
+  } = useContext(presetBankData);
   //---------------------------------logic for CSS 👇🏾👇🏾👇🏾👇🏾👇🏾-----------------------------------------
   const trackColors = [
     ["#4570E6", "#5DADEC", "#76D7EA"],
@@ -30,7 +36,6 @@ function PlayPads() {
   //state variables for whether component is ready to render
   const [colorsLoaded, setColorsLoaded] = useState(false);
   const [colorsSorted, setColorsSorted] = useState(false);
-
 
   //functions to check load status
   const checkColorsLoaded = () => {
@@ -60,7 +65,6 @@ function PlayPads() {
     }
   }, [colorsLoaded]);
 
-
   //function to calculate pad index based on row and col in render
   //eventually move this to helper functions
   const calcPadIndex = (row, col) => {
@@ -71,7 +75,6 @@ function PlayPads() {
   //local state variable to contain recording objects
   //passed up when padRecState changes
   const [localRecs, setLocalRecs] = useState([]);
-
 
   //use effect to update target render based on state variables
   useEffect(() => {
@@ -93,20 +96,21 @@ function PlayPads() {
     }
   }, [colorsSorted, currentTrack, localRecs]);
 
-
   //use effect for local recording logic
-  useEffect(()=>{
-    const recording = {newRec: {
-      track: currentTrack,
-      recs: localRecs,}
-    }
-
-    if(padsRecMode === 2){
-      console.log('time to run my clean up function!');
+  useEffect(() => {
+    let targetTrack = recState.targetRecs.find(
+      (track) => track.trackIndex === currentTrack
+    );
+    if (padsRecMode === 2) {
+      const recording = {
+        track: currentTrack,
+        recs: localRecs,
+      };
+      // console.log("time to run my clean up function!", targetTrack);
       recDispatch({type: 'add', payload: recording});
       setLocalRecs([]);
     }
-  },[padsRecMode]);
+  }, [padsRecMode]);
 
   return (
     <div className="playPads">
