@@ -9,7 +9,7 @@ const recsBankConstructor = () => {
   return _activeRecsArray;
 };
 
-export const initRecsBankState = recsBankConstructor();
+export const initRecsBankState = [];
 
 const ACTIONS = {
   ADD: "add",
@@ -19,14 +19,14 @@ export const recsBankReducer = (recsBankState, action) => {
   switch (action.type) {
     case ACTIONS.ADD:
       {
-        return recsBankState.map((track) => {
-          if (track.trackIndex === action.payload.track) {
-            return {
-              ...track,
-              recordings: [...track.recordings, action.payload.recs],
-            };
-          } else return track;
-        });
+        return [
+          ...recsBankState,
+          {
+            track: action.payload.track,
+            recIndex: action.payload.recIndex,
+            recordings: action.payload.recs,
+          },
+        ];
       }
       break;
   }

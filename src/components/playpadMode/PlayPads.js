@@ -113,8 +113,12 @@ function PlayPads() {
   //use effect for local recording logic
   useEffect(() => {
     if (padsRecMode === 2) {
+      let targetTrack = targetRecState.find(
+        (track) => track.trackIndex === currentTrack
+      );
       const recording = {
         track: currentTrack,
+        recIndex: targetTrack.trackRecs,
         recs: localRecs,
       };
       // console.log("time to run my clean up function!", targetTrack);
