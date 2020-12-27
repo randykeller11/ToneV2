@@ -4,10 +4,18 @@ import PlayPads from "./playpadMode/PlayPads";
 import "./PresetDesign.css";
 import TrackToggle from "./TrackToggle";
 import { initialState, isActiveReducer } from "../reducers/isActiveReducer";
+// import {
+//   initialRecState,
+//   recordingsReducer,
+// } from "../reducers/recordingsReducer";
 import {
-  initialRecState,
-  recordingsReducer,
-} from "../reducers/recordingsReducer";
+  initRecsBankState,
+  recsBankReducer,
+} from "../reducers/recsBankReducer";
+import {
+  initTargetRecState,
+  targetRecsReducer,
+} from "../reducers/targetRecsReducer";
 import Sequencer from "./sequenceMode/Sequencer";
 import { gameModeData } from "./GameMode";
 
@@ -33,9 +41,19 @@ function PresetDesign({ players }) {
   );
 
   //reducer for recording functionality
-  const [recState, recDispatch] = useReducer(
-    recordingsReducer,
-    initialRecState
+  // const [recState, recDispatch] = useReducer(
+  //   recordingsReducer,
+  //   initialRecState
+  // );
+
+  const [targetRecState, targetRecDispatch] = useReducer(
+    targetRecsReducer,
+    initTargetRecState
+  );
+
+  const [recBanksState, recsBankDispatch] = useReducer(
+    recsBankReducer,
+    initRecsBankState
   );
 
   //state variables for presetBank functionality
@@ -53,8 +71,9 @@ function PresetDesign({ players }) {
     currentTrack,
     activeDispatch,
     isActiveArray,
-    recState,
-    recDispatch,
+    targetRecDispatch,
+    targetRecState,
+    recsBankDispatch,
     setPadsRecMode,
     padsRecMode,
     seqModeBar,
@@ -120,7 +139,6 @@ function PresetDesign({ players }) {
     }
   }, [recModeState]);
 
-
   //eventual clean up function
   useEffect(() => {
     if (recModeState === 3) {
@@ -148,29 +166,29 @@ function PresetDesign({ players }) {
   //currently scaled down for only value.
   //eventually needs to handle multiple objects in rec state array
 
-  useEffect(() => {
-    if (recState.recsBank.length > 0) {
-      let localArray = [...activeRecs];
-      // console.log(recState.recsBank[0]);
-      recState.recsBank[0].recs.forEach((pad) => {
-        console.log(pad.padIndex, pad.tStamps);
-        localArray.push(
-          new Tone.Part(
-            (time) => {
-              players[recState.recsBank[0].track][pad.padIndex].start();
-            },
-            [pad.tStamps]
-          )
-        );
-      });
-      localArray.forEach((part) => {
-        part.start(0);
-        part.loopEnd = "4:0:0";
-        part.loop = true;
-      });
-      setActiveRecs(localArray);
-    }
-  }, [recState]);
+  // useEffect(() => {
+  //   if (recState.recsBank.length > 0) {
+  //     let localArray = [...activeRecs];
+  //     // console.log(recState.recsBank[0]);
+  //     recState.recsBank[0].recs.forEach((pad) => {
+  //       console.log(pad.padIndex, pad.tStamps);
+  //       localArray.push(
+  //         new Tone.Part(
+  //           (time) => {
+  //             players[recState.recsBank[0].track][pad.padIndex].start();
+  //           },
+  //           [pad.tStamps]
+  //         )
+  //       );
+  //     });
+  //     localArray.forEach((part) => {
+  //       part.start(0);
+  //       part.loopEnd = "4:0:0";
+  //       part.loop = true;
+  //     });
+  //     setActiveRecs(localArray);
+  //   }
+  // }, [recState]);
 
   //return statement currently only handles play mode
   if (presetMode === 1) {

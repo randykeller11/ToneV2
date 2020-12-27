@@ -9,7 +9,9 @@ function PlayPads() {
   const {
     currentTrack,
     recState,
-    recDispatch,
+    targetRecDispatch,
+    targetRecState,
+    recsBankDispatch,
     padsRecMode,
     setPadsRecMode,
   } = useContext(presetBankData);
@@ -96,18 +98,27 @@ function PlayPads() {
     }
   }, [colorsSorted, currentTrack, localRecs]);
 
-  //use effect for local recording logic
-  useEffect(() => {
-    let targetTrack = recState.targetRecs.find(
+  const playPadsRecDispatch = (_recording, ) => {
+    let targetTrack = targetRecState.find(
       (track) => track.trackIndex === currentTrack
     );
+    if (targetTrack.trackRecs === 0) {
+      targetRecDispatch({ type: "add-init", payload: currentTrack });
+    } else {
+      targetRecDispatch({ type: "add", payload: currentTrack });
+    }
+    recsBankDispatch({ type: "add", payload: _recording });
+  };
+
+  //use effect for local recording logic
+  useEffect(() => {
     if (padsRecMode === 2) {
       const recording = {
         track: currentTrack,
         recs: localRecs,
       };
       // console.log("time to run my clean up function!", targetTrack);
-      recDispatch({type: 'add', payload: recording});
+      playPadsRecDispatch(recording);
       setLocalRecs([]);
     }
   }, [padsRecMode]);
