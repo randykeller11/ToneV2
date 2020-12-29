@@ -145,7 +145,7 @@ function PresetDesign({ players }) {
       //restart transport after update
       Tone.Transport.stop();
       Tone.Transport.position = "0:0:0";
-      Tone.Transport.start("+.01");
+      Tone.Transport.start("+.005");
       // //set presetMode to sequencer mode
       setPresetMode(3);
     }
@@ -164,6 +164,13 @@ function PresetDesign({ players }) {
 
   //useEffect to update active recordings
 
+  const recPadAnimation = (_padLocation) => {
+    activeDispatch({ type: "activate", payload: _padLocation });
+    setTimeout(() => {
+      activeDispatch({ type: "deactivate", payload: _padLocation });
+    }, 500);
+  };
+
   useEffect(() => {
     let localArray = [];
     targetRecState.forEach((track) => {
@@ -181,6 +188,12 @@ function PresetDesign({ players }) {
             new Tone.Part(
               (time) => {
                 players[track.trackIndex][pad.padIndex].start();
+                Tone.Draw.schedule(() => {
+                  recPadAnimation({
+                    padIndex: pad.padIndex,
+                    trackIndex: track.trackIndex,
+                  });
+                }, time);
               },
               [pad.tStamps]
             )
