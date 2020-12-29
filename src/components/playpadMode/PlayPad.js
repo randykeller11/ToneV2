@@ -87,7 +87,7 @@ function PlayPad({ padIndex, padColor, localRecs, setLocalRecs }) {
           if (pad.padIndex === padIndex) {
             let updatedPad = {
               ...pad,
-              tStamps: [...pad.tStamps, transportTime],
+              tStamps: [...pad.tStamps, quantizeTransportPosition(transportTime)],
             };
             return updatedPad;
           }
@@ -99,7 +99,7 @@ function PlayPad({ padIndex, padColor, localRecs, setLocalRecs }) {
           ...localRecs,
           {
             padIndex: padIndex,
-            tStamps: [transportTime],
+            tStamps: [quantizeTransportPosition(transportTime)],
           },
         ];
         setLocalRecs(newArray);
