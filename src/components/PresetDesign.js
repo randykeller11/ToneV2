@@ -163,32 +163,38 @@ function PresetDesign({ players }) {
   }, [isRecording]);
 
   //useEffect to update active recordings
-  //currently scaled down for only value.
-  //eventually needs to handle multiple objects in rec state array
 
-  // useEffect(() => {
-  //   if (recState.recsBank.length > 0) {
-  //     let localArray = [...activeRecs];
-  //     // console.log(recState.recsBank[0]);
-  //     recState.recsBank[0].recs.forEach((pad) => {
-  //       console.log(pad.padIndex, pad.tStamps);
-  //       localArray.push(
-  //         new Tone.Part(
-  //           (time) => {
-  //             players[recState.recsBank[0].track][pad.padIndex].start();
-  //           },
-  //           [pad.tStamps]
-  //         )
-  //       );
-  //     });
-  //     localArray.forEach((part) => {
-  //       part.start(0);
-  //       part.loopEnd = "4:0:0";
-  //       part.loop = true;
-  //     });
-  //     setActiveRecs(localArray);
-  //   }
-  // }, [recState]);
+  useEffect(() => {
+    let localArray = [];
+    targetRecState.forEach((track) => {
+      if (track.targetRecIndex != null) {
+        //find the corresponding rec bank object
+        let targetTrackRecs = recBanksState.find(
+          (trackRec) =>
+            track.trackIndex === trackRec.track &&
+            track.targetRecIndex === trackRec.recIndex
+        );
+        //make tone.parts out of the recordings value and push to local array
+        targetTrackRecs.recordings.forEach((pad) => {
+          console.log(pad.padIndex, pad.tStamps);
+          localArray.push(
+            new Tone.Part(
+              (time) => {
+                players[track.trackIndex][pad.padIndex].start();
+              },
+              [pad.tStamps]
+            )
+          );
+        });
+      }
+    });
+    localArray.forEach((part) => {
+      part.start(0);
+      part.loopEnd = "4:0:0";
+      part.loop = true;
+    });
+    setActiveRecs(localArray);
+  }, [targetRecState, recBanksState]);
 
   //return statement currently only handles play mode
   if (presetMode === 1) {
